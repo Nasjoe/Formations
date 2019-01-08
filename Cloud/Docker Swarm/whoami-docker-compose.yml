@@ -1,0 +1,36 @@
+version: "3"
+services:
+  whoami0:
+    image: containous/whoami
+    networks:
+      - traefik-net
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /dev/null:/traefik.toml
+    deploy:
+      labels:
+        - "traefik.port=80"
+        - "traefik.frontend.rule=Host:whoami0.prout.re"
+
+  whoami1:
+    image: containous/whoami
+    networks:
+      - traefik-net
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /dev/null:/traefik.toml
+    deploy:
+      labels:
+        - "traefik.port=80"
+        - "traefik.backend.loadbalancer.stickiness=true"
+        - "traefik.frontend.rule=Host:whoami1.traefik.re"
+
+
+networks:
+  traefik-net:
+    external:
+      name: traefik-net
+
+
+# run avec :
+# docker stack deploy -c whoami-docker-compose.yml mystack

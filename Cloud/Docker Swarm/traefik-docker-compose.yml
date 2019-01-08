@@ -1,0 +1,48 @@
+version: "3"
+services:
+  traefik:
+    image: traefik
+    command: --web \
+      --docker \
+      --docker.swarmmode \
+      --docker.domain=traefik.re \
+      --docker.watch \
+      --logLevel=DEBUG
+    networks:
+      - traefik-net
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /dev/null:/traefik.toml
+    deploy:
+      placement:
+        constraints: [node.role==manager]
+
+  # portainer:
+  #   image: portainer/portainer
+  #   volumes:
+  #     - "/var/run/docker.sock:/var/run/docker.sock"
+  #     - "./portainerdata:/data"
+  #   networks:
+  #     - traefik-net
+  #   deploy:
+  #     placement:
+  #       constraints: [node.role == manager]
+  #     labels:
+  #       - "traefik.enable=true"
+  #       - "traefik.port=9000"
+  #       - "traefik.docker.network=mystack_traefik-net"
+  #       - "traefik.frontend.rule=Host:portainer.traefik.re"
+ 
+
+networks:
+  traefik-net:
+    external:
+      name: traefik-net
+
+
+# run avec :
+# docker stack deploy -c traefik-docker-compose.yml mystack

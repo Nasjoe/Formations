@@ -85,7 +85,7 @@ Pas très joli, mais efficace. Le inline-block nous permet du coup de rajouter d
 ### Les positions absolues, fixes et relatives
 
 - absolute : Le positionnement absolu : il nous permet de placer un élément n'importe où sur la page (en haut à gauche, en bas à droite, tout au centre, etc.).
-- absolute : Le positionnement fixe : identique au positionnement absolu mais, cette fois, l'élément reste toujours visible, même si on descend plus bas dans la page. C'est un peu le même principe que **background-attachment: fixed;**.
+- fixe : Le positionnement fixe : identique au positionnement absolu mais, cette fois, l'élément reste toujours visible, même si on descend plus bas dans la page. C'est un peu le même principe que **background-attachment: fixed;**.
 - relative : Le positionnement relatif : permet de décaler l'élément par rapport à sa position normale.
 
 ##### absolute 
