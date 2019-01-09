@@ -4,16 +4,10 @@
 
 Tout d’abord un cluster qu’est-ce que c’est ? Littéralement une grappe de serveurs, c’est l’association de plusieurs serveurs ou nœuds qui forment le cluster.
 
-
-
 - **augmenter la disponibilité**: plus de serveurs, moins de chance qu’il tombent tous en même temps.
 - **faciliter la montée en charge**: il est plus facile d’augmenter la charge quand on peut la répartir sur plusieurs serveurs.
 - **permettre la répartition de la charge:** la répartition des performances d’un serveur à l’autre en cas de surexploitation d’un serveur.
 - **faciliter la gestion des ressources**.
-
-
-
-
 
 ## Docker Swarm :
 
@@ -28,8 +22,7 @@ Tout d’abord un cluster qu’est-ce que c’est ? Littéralement une grappe de
    3. Scaling
    4. Reverse-Proxy
    5. docker-compose
-
-
+   6. Devops, SysAdmin
 
 ### Notions :
 
@@ -43,7 +36,7 @@ Il existe deux types de rôles pour un noeud:
 
 Les managers sont les leaders du cluster et c’est eux qui sont responsables de l’exécution des algorithmes d’orchestration.
 
-L’une des best practices à retenir est que le nombre de managers ne doit jamais être un nombre pair mais plutôt impair: 1, 3, 5 .. etc. Ceci garantira une bonne exécution de l’algorithme Raft qui est indispensable pour la disponibilité d’un cluster et qui utilise le vote.
+L’une des *best practices* à retenir est que le nombre de managers ne doit jamais être un nombre pair mais plutôt impair: 1, 3, 5 .. etc. Ceci garantira une bonne exécution de l’algorithme Raft qui est indispensable pour la disponibilité d’un cluster et qui utilise le vote.
 
 Pour plus d'info sur l'election : https://www.aneo.eu/2018/02/06/lorchestration-docker-swarm/
 
@@ -249,7 +242,7 @@ Presque pareil, avec quelques différences légères. Tout d'abord, il convient 
 # Checker les variables d'environements :
 docker-machine env manager
 # Les utiliser :
-eval $(docker-machine env maanger)
+eval $(docker-machine env manager)
 ```
 
 Une fois éxécuté, nous pouvons nous passer du *docker-machine ssh trucmuche* :
@@ -310,4 +303,10 @@ docker-machine stop $(docker-machine ls -q)               # Stop all running VMs
 docker-machine rm $(docker-machine ls -q) # Delete all VMs and their disk images
 ```
 
+## HTTPS Avec Let's Encrypt
+
+Quelques fichiers de config' pour Traefik a écrire. (https://docs.traefik.io/user-guide/docker-and-lets-encrypt/)
+
 ## DATA Persistante
+
+A rédiger. D'ici la, bosser avec git :). Mais des solutions existent comme vieux/ssh, ou en nfs. Cf doc Docker.
