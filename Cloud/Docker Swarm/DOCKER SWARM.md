@@ -102,12 +102,36 @@ Pour plus d'info sur l'election : https://www.aneo.eu/2018/02/06/lorchestration-
 7. Vérifier que tout s'est bien passé :
 
    ```bash
-   docker-machine ssh manager docker node ls
+   docker-machine ssh manager "docker node ls"
+   ```
+
+8. Ajoutons quelques outils qui permettent de visualiser plus joliment notre cluster :
+
+   ```bash
+   docker-machine ssh manager "docker service create \
+     --name=viz \
+     --publish=5050:8080/tcp \
+     --constraint=node.role==manager \
+     --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
+     dockersamples/visualizer"
+   ```
+
+   Récupérons l'adresse ip du manager et allons voir du coté du port 5050. Visualizer est un outils relativement simple.
+
+   Pour une orchestration un peu plus poussée en GUI, nous pouvons utiliser Portainer :
+
+   ```bash
+   docker-machine ssh manager "docker service create \
+    --name=portainer \
+    --publish=5060:9000/tcp \
+    --constraint=node.role==manager \
+    --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
+    portainer/portainer"
    ```
 
 ### Traefik :
 
-Traefik est un reverse-proxy. Il administre les requetes en fonction du nom de domaine auquelles elles sont ratachées et gère les certificats SSL pour avoir du https facilement avec lets-encrypt. Pour ceux qui connaissent, c'est un peu le nginx-jwilder-letsencrypt boosté et moderne. Il s'intergre parfaitement à l'environnement docker et swarm. 
+Traefik est un reverse-proxy. Il administre les requetes en fonction du nom de domaine auquelles elles sont ratachées et gère les certificats SSL pour avoir du https facilement avec lets-encrypt. Pour ceux qui connaissent, c'est un peu le nginx-jwilder-letsencrypt boosté et moderne car il gère, , entre autre, le load-balancing. De plus, Il s'integre parfaitement à l'environnement docker et swarm. 
 
 1. Créons un réseau qui ne sera utilisé que par Traefik et les application front qui utilisent le port HTTP.
 
