@@ -1,0 +1,44 @@
+version: "3"
+services:
+  whoami0:
+    image: containous/whoami
+    networks:
+      - traefik-net
+    volumes:
+      - mydata:/data
+    deploy:
+      replicas: 5
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      labels:
+        - "traefik.port=80"
+        - "traefik.frontend.rule=Host:whoami0.prout.re"
+
+  whoami1:
+    image: containous/whoami
+    networks:
+      - traefik-net
+    volumes:
+      - mydata:/data
+
+    deploy:
+      labels:
+        - "traefik.port=80"
+        - "traefik.backend.loadbalancer.stickiness=true"
+        - "traefik.frontend.rule=Host:whoami1.traefik.re"
+
+
+networks:
+  traefik-net:
+    external:
+      name: traefik-net
+
+volumes:
+  mydata:
+
+# run avec :
+# docker stack deploy -c whoami-docker-compose.yml mystack

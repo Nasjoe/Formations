@@ -1,0 +1,27 @@
+version: "3"
+services:
+  portainer:
+    image: portainer/portainer
+    volumes:
+          - ./data/portainer:/data
+    networks:
+      - traefik-net
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      placement:
+        constraints: [node.role==manager]
+      labels:
+        - "traefik.enable=true"
+        - "traefik.port=9000"
+        - "traefik.docker.network=mystack_traefik-net"
+        - "traefik.frontend.rule=Host:portainer.traefik.re"
+
+networks:
+  traefik-net:
+    external:
+      name: traefik-net
+
+
+# run avec :
+# docker stack deploy -c portainer-visu-docker-compose.yml mystack

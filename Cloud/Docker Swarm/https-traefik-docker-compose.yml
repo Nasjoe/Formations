@@ -1,0 +1,76 @@
+# version: "3"
+# services:
+#   traefik:
+#     image: traefik
+#     # container_name: traefik
+#     command: --web \
+#       --docker \
+#       --docker.swarmmode \
+#       --docker.domain=traefik.re \
+#       --docker.watch \
+#       --logLevel=DEBUG
+#     networks:
+#       - traefik-net
+#     ports:
+#       - "80:80"
+#       - "443:443"
+#       - "8080:8080"
+#     volumes:
+#       - /var/run/docker.sock:/var/run/docker.sock
+#       - /home/docker/Traefik-Exemple/traefik.toml:/traefik.toml
+#       - /home/docker/Traefik-Exemple/acme.json:/acme.json
+#     deploy:
+#       placement:
+#         constraints: [node.role==manager]
+
+
+
+version: "3"
+services:
+  traefik:
+    image: traefik
+
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/docker/Traefik-Exemple/acme.json:/acme.json
+    networks:
+      - traefik-net
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    command:
+      - "--api"
+      - "--entrypoints=Name:http Address::80 Redirect.EntryPoint:https"
+      - "--entrypoints=Name:https Address::443 TLS"
+      - "--defaultentrypoints=http,https"
+      - "--acme"
+      - "--acme.storage=/acme.json"
+      - "--acme.entryPoint=https"
+      - "--acme.httpChallenge.entryPoint=http"
+      - "--acme.onHostRule=true"
+      - "--acme.onDemand=false"
+      - "--acme.email=contact@mydomain.ca"
+      - "--docker"
+      - "--docker.swarmMode"
+      - "--docker.domain=gdna.eu"
+      - "--docker.watch"
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.role == manager
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+networks:
+  traefik-net:
+    external:
+      name: traefik-net
+
+
+# run avec :
+# docker stack deploy -c traefik-docker-compose.yml mystack

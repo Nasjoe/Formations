@@ -1,0 +1,36 @@
+version: "3"
+services:
+  whoami0:
+    image: containous/whoami
+    networks:
+      - traefik-net
+    volumes:
+      - mydata:/data
+    deploy:
+      replicas: 5
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      labels:
+        - "traefik.backend=whoami0"
+        - "traefik.port=80"
+        - "traefik.backend.loadbalancer.stickiness=true"
+        - "traefik.frontend.rule=Host:peaks.gdna.eu"
+        # - "traefik.frontend.rule=Host:serv1.it-wars.com;PathPrefixStrip:/s1" # <-- Change this domain
+        - "traefik.enable=true"
+
+
+
+networks:
+  traefik-net:
+    external:
+      name: traefik-net
+
+volumes:
+  mydata:
+
+# run avec :
+# docker stack deploy -c whoami-docker-compose.yml mystack
