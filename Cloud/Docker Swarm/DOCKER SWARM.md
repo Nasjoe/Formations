@@ -48,10 +48,17 @@ Pour plus d'info sur l'election : https://www.aneo.eu/2018/02/06/lorchestration-
 
     On utilise ici la version 18.06.1-ce car la *lattest* est buggé avec virtualbox. Elle n'ouvre pas les ports automatiquement (https://forums.docker.com/t/get-started-part-4-connection-refused-from-node-on-virtual-machine/62511/10)
 
-2. Créer le manager :
+   Sous windows, suivre le tuto suivant pour configurer Hyper-V : https://docs.docker.com/machine/drivers/hyper-v/#3-reboot
+
+2. Créer le manager avec docker-machine:
+
+   docker-machine est un outil qui permet de creer des machines virtuelles a la volée. Il supporte pas mal de *driver* VM, comme virtualbox, quemu, lxc, et sous windows : hyper-v.
 
    ```bash
     docker-machine create --driver virtualbox --virtualbox-boot2docker-url ./ISO/boot2docker.iso manager
+   
+    # Windows :
+    docker-machine create -d hyperv --hyperv-boot2docker-url "boot2docker.iso" --hyperv-virtual-switch "Primary Virtual Switch" manager
    ```
 
 3. Créer les noeuds :
@@ -59,6 +66,10 @@ Pour plus d'info sur l'election : https://www.aneo.eu/2018/02/06/lorchestration-
    ```bash
     docker-machine create --driver virtualbox --virtualbox-boot2docker-url ./ISO/boot2docker.iso worker1
     docker-machine create --driver virtualbox --virtualbox-boot2docker-url ./ISO/boot2docker.iso worker2
+   
+    #Windows :
+    docker-machine create -d hyperv --hyperv-boot2docker-url "boot2docker.iso" --hyperv-virtual-switch "Primary Virtual Switch" worker1
+    docker-machine create -d hyperv --hyperv-boot2docker-url "boot2docker.iso" --hyperv-virtual-switch "Primary Virtual Switch" worker2
    ```
 
 4. Initialiser le cluster :
@@ -67,6 +78,8 @@ Pour plus d'info sur l'election : https://www.aneo.eu/2018/02/06/lorchestration-
    docker-machine ssh manager "docker swarm init \
        --listen-addr $(docker-machine ip manager) \
        --advertise-addr $(docker-machine ip manager)"
+       
+   # Sous Windows, virer les \
    ```
 
 5. Récuperer le token du cluster :
@@ -74,6 +87,9 @@ Pour plus d'info sur l'election : https://www.aneo.eu/2018/02/06/lorchestration-
    ```bash
    export worker_token=$(docker-machine ssh manager "docker swarm \
    join-token worker -q")
+   
+   # Sous Windows :
+   $worker_token=$(docker-machine ssh manager "docker swarm join-token worker -q")
    ```
 
 6. Joindre les noeuds dans le cluster :
@@ -90,6 +106,8 @@ Pour plus d'info sur l'election : https://www.aneo.eu/2018/02/06/lorchestration-
        --listen-addr $(docker-machine ip worker2) \
        --advertise-addr $(docker-machine ip worker2) \
        $(docker-machine ip manager)"
+       
+   # Merdows : Virer les \
    ```
 
 7. Vérifier que tout s'est bien passé :
