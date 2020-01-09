@@ -1,0 +1,39 @@
+#conteneur
+{
+	border: 4px solid black;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    align-items: center;
+    /*flex-wrap: wrap;*/
+    /*align-content: stretch;*/
+
+    height: 500px
+
+}
+
+.element
+{
+	width: 150px;
+	height: 100px
+}
+
+.orange
+{
+	background-color: orange;
+	/*flex: 3;*/
+}
+
+.vert
+{
+	background-color: green;
+	/*flex: 2;*/
+}
+
+.jaune
+{
+	background-color: yellow;
+    /*flex: 1;*/
+}
