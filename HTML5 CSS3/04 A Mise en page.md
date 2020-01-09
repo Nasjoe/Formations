@@ -97,7 +97,7 @@ Si vous voulez que le texte ne dépasse pas des limites du paragraphe, il va fal
 - auto: c'est le mode « pilote automatique ». En gros, c'est le navigateur qui décide de mettre ou non des barres de défilement (il n'en mettra que si c'est nécessaire). C'est la valeur que je conseille d'utiliser le plus souvent.
 
 
-Pour les texte trop lard, souvent le cas avec les url, on utilise `word-wrap: break-word;`
+Pour les textes trop large, souvent le cas avec les url, on utilise `word-wrap: break-word;`
 
 
 ## Flexbox !
