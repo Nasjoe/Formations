@@ -336,3 +336,6 @@ Faites attention !
 Le self n’est pas au même endroit dans super(ClassCourante, self).methode(args...) et ClasseParente.methode(self, args...). Et dans le premier cas, on passe la classe courante (que super() va analyser pour trouver les parents automatiquement), dans le cas suivant, on écrit le nom de la classe parente en dur.
 
 Faites quelques tests avec des scripts bidons pour bien comprendre comment ça marche. Faites ça avec des classes toutes simples. Sinon le jour où vous aurez une classe compliquée, vous allez vous embrouiller.
+
+
+la suite : http://sametmax.com/le-guide-ultime-et-definitif-sur-la-programmation-orientee-objet-en-python-a-lusage-des-debutants-qui-sont-rassures-par-les-textes-detailles-qui-prennent-le-temps-de-tout-expliquer-partie-5/
