@@ -80,6 +80,11 @@ Il est représenté par l'inspecteur de code de Firefox/Chrome.
 	+ var x = "Hello" + " " + "World" + " " + "!"
 	+ var n = 10 + 5
 	
+
+### Les conditions
+
+- `if`, `else`
+
 - `>` , `<`, `>=`, `<=`, `!=`, `==`
 
 - `&&` , `||`, `!`
@@ -87,12 +92,7 @@ Il est représenté par l'inspecteur de code de Firefox/Chrome.
 ```JS
 if (x < 10 && y > 1) is true {...}
 ```
-
 https://www.w3schools.com/js/js_comparisons.asp
-
-### Les conditions
-
-- `if`, `else`
 
 ```JS
 if (Y[0] == "ours") {
