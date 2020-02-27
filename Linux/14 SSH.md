@@ -70,6 +70,10 @@ Pour aller plus loin :
 
 https://www.malekal.com/securiser-serveur-ssh/
 
+et pour le chroot :
+
+https://wiki.archlinux.org/index.php/SFTP_chroot
+
 
 
 En résumé
