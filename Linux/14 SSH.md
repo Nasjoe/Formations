@@ -57,7 +57,9 @@ puis, par exemple :
 
 `ssh-copy-id -i id_rsa.pub "-p 14521 mateo21@88.92.107.7"`
 
-La clé est ensuite automatiquement ajoutée à `~/.ssh/authorized_keys`  sur le serveur. 
+La clé est ensuite automatiquement ajoutée à `~/.ssh/authorized_keys`  sur le serveur sous reserve que l'on ai le mot de passe de l'user.
+
+Sinon, il faudra rentrer manuellement la clé ssh publiue dans le fichier authorized_keys de l'user.
 
 
 exercice : Entrez sur un serveur depuis windows avec putty. Et une clef SSH.
