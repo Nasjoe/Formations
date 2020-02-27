@@ -39,7 +39,6 @@ SSH utilise les deux chiffrements : asymétrique et symétrique. Cela fonctionne
 
 le chiffrement asymétrique demande beaucoup trop de ressources au processeur. Le chiffrement asymétrique est 100 à 1 000 fois plus lent que le chiffrement symétrique !
 
-
 ## En pratique :
 
 `sudo apt-get install openssh-server`
@@ -58,19 +57,19 @@ puis, par exemple :
 
 `ssh-copy-id -i id_rsa.pub "-p 14521 mateo21@88.92.107.7"`
 
-La clé est ensuite automatiquement ajoutée à~/.ssh/authorized_keyssur le serveur. 
+La clé est ensuite automatiquement ajoutée à `~/.ssh/authorized_keys`  sur le serveur. 
 exercice : Entrez sur un serveur depuis windows avec putty. Et une clef SSH.
 
 En résumé
 
     - On peut se connecter à distance à un ordinateur équipé de Linux et accéder à sa console. C'est comme cela que l'on administre les serveurs sous Linux.
-
+    
     - Le PC qui se connecte au serveur équipé de Linux est appelé le client. On peut se connecter à une console Linux à distance depuis n'importe quel autre système d'exploitation (Windows, Mac OS ou Linux).
-
+    
     - Sous Windows, il faut installer le programme PuTTY pour se connecter à distance à un PC équipé de Linux.
-
+    
     - Sous Linux et Mac OS, on utilise la commandesshà laquelle on indique son login et l'adresse IP de la machine. Par exemple :ssh mateo21@74.141.18.33.
-
+    
     - Les données qui sont échangées entre le client et le serveur sont chiffrées grâce au protocole SSH afin de garantir la confidentialité des échanges.
-
+    
     - Pour éviter de devoir entrer son mot de passe à chaque fois que l'on se connecte au serveur, on peut se créer une paire de clés d'identification. La clé publique ainsi générée doit être envoyée sur le serveur, la clé privée restant sur le PC du client. La connexion se fait alors sans mot de passe et reste sécurisée.
