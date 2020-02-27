@@ -66,6 +66,12 @@ exercice : Entrez sur un serveur depuis windows avec putty. Et une clef SSH.
 
 
 
+Pour aller plus loin :
+
+https://www.malekal.com/securiser-serveur-ssh/
+
+
+
 En résumé
 
     - On peut se connecter à distance à un ordinateur équipé de Linux et accéder à sa console. C'est comme cela que l'on administre les serveurs sous Linux.
