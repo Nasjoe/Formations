@@ -7,13 +7,11 @@ Créons un nouveau script :
 `subl variable.sh`
 
 ```bash
-message='Bonjour tout le monde,\nc\'est moi '
+message="Bonjour tout le monde,\nc\'est moi "
 echo $message
 ```
 
 le \ est un caractère d'échapement.
-
-
 
 #### Les quotes
 
@@ -40,8 +38,6 @@ echo "vous êtes dans le dossier $message"
 
 Vous pouvez demander à l'utilisateur de saisir du texte avec la commande `read`. Ce texte sera immédiatement stocké dans une variable.
 
-
-
 ```bash
 #!/bin/bash
 
@@ -58,13 +54,9 @@ echo "Bonjour $prenom $nom !"
 
 ###### `-s` : ne pas afficher le texte saisi
 
-
-
 ### Effectuer des opérations mathématiques
 
 En bash, les variables sont toutes des chaînes de caractères. En soi, le bash n'est pas vraiment capable de manipuler des nombres ; il n'est donc pas capable d'effectuer des opérations.
-
-
 
 ```bash
 #!/bin/bash
@@ -89,8 +81,6 @@ Les opérations utilisables sont :
 
 - le modulo (renvoie le reste de la division entière) : %.
 
-
-
 Quelques exemples :
 
 ```bash
@@ -111,8 +101,6 @@ Une petite explication pour les deux dernières lignes :
 - 10
    % 3 renvoie 1 car le reste de la division de 10 par 3 est 1. En effet, 3
    « rentre » 3 fois dans 10 (ça fait 9), et il reste 1 pour aller à 10.
-
-
 
 ### Les variables d'environnement
 
@@ -143,8 +131,6 @@ trouve :
 
 Vous pourriez avoir besoin de définir votre propre variable d'environnement. Pour cela, on utilise la commande `export` que vous avez pu voir dans votre `.bashrc`.
 
-
-
 ### Les variables des paramètres
 
 Comme toutes les commandes, vos scripts bash peuvent eux aussi accepter des 
@@ -168,8 +154,6 @@ En effet, des variables sont automatiquement créées :
 
 - **$9** : contient le 9e paramètre.
 
-
-
 ```bash
 #!/bin/bash
 
@@ -179,15 +163,11 @@ echo "Le paramètre 1 est $1"
 
 On peut « décaler » les paramètres dans les variables `$1`, `$2`, etc. à l’aide de la commande `shift`.
 
-
-
 ### Les tableaux
 
 Le bash gère également les variables « tableaux ». Ce sont des variables qui contiennent plusieurs cases, comme un tableau.
 
 En python, on parle de liste ou de dictionnaire. En php on parle d'Array. Parfois aussi on parle de json.#!/bin/bash
-
-
 
 ```bash
 
@@ -196,8 +176,6 @@ tableau[5]='valeur5'
 echo ${tableau[1]}
 echo ${tableau[*]}
 ```
-
-
 
 #### En résumé
 
