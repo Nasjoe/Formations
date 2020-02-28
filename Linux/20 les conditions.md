@@ -41,8 +41,6 @@ else
 fi
 ```
 
-exercice : Script qui demande un prenom, ou qui prend un argument et qui affiche un résultat en fonction.
-
 
 
 ### Les tests
@@ -96,6 +94,7 @@ Bien que bash gère les variables comme des chaînes de caractères pour son fon
 
 Vérifions par exemple si un nombre est supérieur ou égal à un autre nombre :
 
+```bash
 #!/bin/bash
 if [ $1 -ge 20 ]
 then
@@ -103,3 +102,158 @@ then
 else
         echo "Vous avez envoyé moins de 20"
 fi
+```
+
+##### Tests sur des fichiers
+
+Un des avantages de bash sur d'autres langages est que l'on peut très facilement faire des tests sur des fichiers : savoir s'ils existent, si on peut écrire dedans, s'ils sont plus vieux, plus récents, etc. Le tableau suivant présente les différents types de tests disponibles.
+
+| Condition                 | Signification                                                                                                                    |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `-e $nomfichier`          | Vérifie si le fichier existe.                                                                                                    |
+| `-d $nomfichier`          | Vérifie si le fichier est un répertoire. N'oubliez pas que sous Linux, tout est considéré comme un fichier, même un répertoire ! |
+| `-f $nomfichier`          | Vérifie si le fichier est un… fichier. Un vrai fichier cette fois, pas un dossier.                                               |
+| `-L $nomfichier`          | Vérifie si le fichier est un lien symbolique (raccourci).                                                                        |
+| `-r $nomfichier`          | Vérifie si le fichier est lisible (r).                                                                                           |
+| `-w $nomfichier`          | Vérifie si le fichier est modifiable (w).                                                                                        |
+| `-x $nomfichier`          | Vérifie si le fichier est exécutable (x).                                                                                        |
+| `$fichier1 -nt $fichier2` | Vérifie si`fichier1`est plus récent que`fichier2`(**n***ewer***t***han*).                                                        |
+| `$fichier1 -ot $fichier2` | Vérifie si`fichier1`est plus vieux que`fichier2`(**o***lder***t***han*).                                                         |
+
+#### Effectuer plusieurs tests à la fois
+
+Dans un`if`, il est possible de faire plusieurs tests à la fois. En général, on vérifie :
+
+- si un test est vrai **ET** qu'un autre test est vrai ;
+
+- si un test est vrai **OU** qu'un autre test est vrai.
+
+Les deux symboles à connaître sont :
+
+- **&&** : signifie « et » ;
+
+- **||** : signifie « ou ».
+
+Il faut encadrer chaque condition par des crochets. Prenons un exemple :
+
+```bash
+#!/bin/bash
+
+if [ $# -ge 1 ] && [ $1 = 'koala' ]
+then
+        echo "Bravo !"
+        echo "Vous connaissez le mot de passe"
+else
+        echo "Vous n'avez pas le bon mot de passe"
+fi
+```
+
+Le test vérifie deux choses :
+
+- qu'il y a au moins un paramètre (« si`$#`est supérieur ou égal à 1 ») ;
+
+- que le premier paramètre est bien`koala`(« si`$1`est égal à`koala` »).
+
+Si ces deux conditions sont remplies, alors le message indiquant que l'on a trouvé le bon mot de passe s'affichera.
+
+```bash
+$ ./conditions.sh koala
+Bravo !
+Vous connaissez le mot de passe
+```
+
+
+
+Notez que les tests sont effectués l'un après l'autre et seulement s'ils sont nécessaires. Bash vérifie d'abord s'il y a au moins un paramètre. Si ce n'est pas le cas, il ne fera pas le second test puisque la condition ne sera de toute façon pas vérifiée.
+
+#### Inverser un test
+
+Il est possible d'inverser un test en utilisant la négation. En bash, celle-ci est exprimée par le point d'exclamation « `!` ».
+
+```bash
+if [ ! -e fichier ]
+then
+        echo "Le fichier n'existe pas"
+fi
+```
+
+### case : tester plusieurs conditions à la fois
+
+On a vu tout à l'heure un`if`un peu complexe qui faisait appel à des`elif`et à un`else` :
+
+```bash
+#!/bin/bash
+
+if [ $1 = "Bruno" ]
+then
+        echo "Salut Bruno !"
+elif [ $1 = "Michel" ]
+then
+        echo "Bien le bonjour Michel"
+elif [ $1 = "Jean" ]
+then
+        echo "Hé Jean, ça va ?"
+else
+        echo "J'te connais pas, ouste !"
+fi
+```
+
+Ce genre de « gros`if`qui teste toujours la même variable » ne pose pas de problème mais n'est pas forcément très facile à lire pour le programmeur. À la place, il est possible d’utiliser l'instruction`case`si nous voulons.
+
+Le rôle de`case`est de tester la valeur d'une même variable, mais de manière plus concise et lisible.
+
+Voyons comment on écrirait la condition précédente avec un`case` :
+
+```bash
+#!/bin/bash
+
+case $1 in
+        "Bruno")
+                echo "Salut Bruno !"
+                ;;
+        "Michel")
+                echo "Bien le bonjour Michel"
+                ;;
+        "Jean")
+                echo "Hé Jean, ça va ?"
+                ;;
+        *)
+                echo "J'te connais pas, ouste !"
+                ;;
+esac
+```
+
+#### En résumé
+
+- On effectue des tests dans ses programmes grâce aux  `if`,  `then`,  `[[ elif, then, fi] else,] fi`.
+
+- On
+   peut comparer deux chaînes de caractères entre elles, mais aussi des 
+  nombres. On peut également effectuer des tests sur des fichiers : est-ce
+   que celui-ci exis‌te ? Est-il exécutable ? Etc.
+
+- Au besoin, il est possible de combiner plusieurs tests à la fois avec les symboles`&&`(ET) et`||`(OU).
+
+- Le symbole`!`(point d'exclamation) exprime la négation dans une condition.
+
+- Lorsque l'on effectue beaucoup de tests sur une même variable, il est parfois plus pratique d'utiliser un bloc`case in… esac`plutôt qu'un bloc`if… fi`.
+
+
+
+Exercices :
+
+faire un script qui demande à l'utilisateur d'entrer le nom d'un répertoire et qui vérifie si c'en est bien un
+
+Écrire un programme qui affiche les nombres de 1 à 199. Mais pour les multiples de 3, afficher “Fizz” au lieu du nombre et pour les multiples de 5 afficher “Buzz”. Pour les nombres multiples de 3 et 5, afficher 
+“FizzBuzz”.
+
+
+
+
+
+exercice : Script qui demande la marque d'une voiture ( Mercedes, BMW, Renault ), ou qui prend un argument et qui affiche un résultat en fonction.
+
+exercice hard : Écrire un programme qui affiche les nombres de 1 à 199. Mais pour les 
+multiples de 3, afficher “Fizz” au lieu du nombre et pour les multiples 
+de 5 afficher “Buzz”. Pour les nombres multiples de 3 et 5, afficher 
+“FizzBuzz” !
