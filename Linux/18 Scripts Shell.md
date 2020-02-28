@@ -11,12 +11,11 @@ La blague, il existe plusieurs shell :
 - tcsh : Tenex C Shell. Amélioration du C Shell.
 - zsh : Z Shell. Shell assez récent reprenant les meilleures idées de bash, ksh et tcsh.
 
-
 ## Notre premier script :
 
 La première chose à faire dans un script shell est d'indiquer… quel shell est utilisé.
 
-``` bash
+```bash
 #!/bin/bash
 ```
 
@@ -28,11 +27,10 @@ En l'absence de cette ligne, c'est le shell de l'utilisateur qui sera chargé. C
 
  pour exécuter un script, il faut que le fichier ait le droit « exécutable ». Le plus simple pour donner ce droit est d'écrire 
 
-``` bash
+```bash
 chmod +x script.sh
 ./script.sh
 ```
-
 
 ### Exécution de débogage
 
@@ -40,13 +38,12 @@ Plus tard, vous ferez probablement de gros scripts et risquerez de rencontrer de
 
 Il faut l'exécuter comme ceci :
 
-`bash -x essai.sh`
-
+`bash -x script.sh`
 
 ### Créer sa propre commande
 
 Actuellement, le script doit être lancé via `./essai.sh` et vous devez être dans le bon répertoire.
-Ou alors vous devez taper le chemin en entier, comme `/home/mateo21/scripts/essai.sh`.
+Ou alors vous devez taper le chemin en entier, comme `/home/user/scripts/script.sh`.
 
 Comment font les autres programmes pour pouvoir être exécutés depuis n'importe quel répertoire sans « ./ » devant ?
 
