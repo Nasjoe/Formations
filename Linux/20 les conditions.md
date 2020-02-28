@@ -227,8 +227,7 @@ esac
 
 - On effectue des tests dans ses programmes grâce aux  `if`,  `then`,  `[[ elif, then, fi] else,] fi`.
 
-- On
-   peut comparer deux chaînes de caractères entre elles, mais aussi des 
+- On peut comparer deux chaînes de caractères entre elles, mais aussi des 
   nombres. On peut également effectuer des tests sur des fichiers : est-ce
    que celui-ci exis‌te ? Est-il exécutable ? Etc.
 
