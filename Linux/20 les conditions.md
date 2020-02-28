@@ -6,7 +6,6 @@ même chose… ce qui serait bien ennuyeux.
 
 Les branchements conditionnels (que nous abrègerons « conditions ») constituent un moyen de dire dans notre script « SI cette variable vaut tant, ALORS fais ceci, SINON fais cela ». 
 
-
 ### if : la condition la plus simple
 
 Le type de condition le plus courant est le`if`, qui signifie « si ».
@@ -41,8 +40,6 @@ else
 fi
 ```
 
-
-
 ### Les tests
 
 Voyons maintenant un peu quels sont les tests que nous pouvons faire. Pour l'instant, on a juste vérifié si deux chaînes de caractères étaient identiques, mais on peut faire beaucoup plus de choses que cela !
@@ -56,8 +53,6 @@ Il est possible d’effectuer trois types de tests différents en bash :
 - des tests sur des nombres ;
 
 - des tests sur des fichiers.
-
-
 
 | Condition              | Signification                                                                                                                                                                                      |
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -162,8 +157,6 @@ Bravo !
 Vous connaissez le mot de passe
 ```
 
-
-
 Notez que les tests sont effectués l'un après l'autre et seulement s'ils sont nécessaires. Bash vérifie d'abord s'il y a au moins un paramètre. Si ce n'est pas le cas, il ne fera pas le second test puisque la condition ne sera de toute façon pas vérifiée.
 
 #### Inverser un test
@@ -237,22 +230,9 @@ esac
 
 - Lorsque l'on effectue beaucoup de tests sur une même variable, il est parfois plus pratique d'utiliser un bloc`case in… esac`plutôt qu'un bloc`if… fi`.
 
-
-
 Exercices :
 
 faire un script qui demande à l'utilisateur d'entrer le nom d'un répertoire et qui vérifie si c'en est bien un
 
 Écrire un programme qui affiche les nombres de 1 à 199. Mais pour les multiples de 3, afficher “Fizz” au lieu du nombre et pour les multiples de 5 afficher “Buzz”. Pour les nombres multiples de 3 et 5, afficher 
 “FizzBuzz”.
-
-
-
-
-
-exercice : Script qui demande la marque d'une voiture ( Mercedes, BMW, Renault ), ou qui prend un argument et qui affiche un résultat en fonction.
-
-exercice hard : Écrire un programme qui affiche les nombres de 1 à 199. Mais pour les 
-multiples de 3, afficher “Fizz” au lieu du nombre et pour les multiples 
-de 5 afficher “Buzz”. Pour les nombres multiples de 3 et 5, afficher 
-“FizzBuzz” !
