@@ -24,7 +24,7 @@ Il est possible d'utiliser des **quotes** pour délimiter un paramètre contenan
 - les accents graves ` ` (back quotes), qui s'insèrent avec `Alt Gr + 7` sur un clavier AZERTY français.
 
 ```bash
-Message='Bonjour tout le monde'
+message='Bonjour tout le monde'
 echo 'Le message est : $message'
 echo "Le message est : $message"
 ```
