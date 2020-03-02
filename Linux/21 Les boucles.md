@@ -21,8 +21,6 @@ La boucle`for`permet de parcourir une liste de valeurs et de boucler autant de f
 
 Concrètement, la forme d'un`for`est la suivante :
 
-
-
 ```
 POUR variable PRENANT valeur1 valeur2 valeur3
 FAIRE
@@ -56,8 +54,6 @@ done
 
 Si aucun paramètre n'est envoyé, vous demanderez à l'utilisateur de saisir le nom des fichiers à renommer avec`read`.
 
-
-
 #### Un`for`plus classique
 
 Pour les habitués d'autres langages de programmation, le`for`est une boucle qui permet de faire prendre à une variable une suite de nombres.
@@ -72,13 +68,9 @@ do
 done
 ```
 
-
-
 ### while : boucler « tant que »
 
 Le type de boucle que l'on rencontre le plus couramment en bash est`while`.
-
-
 
 ```bash
 while [ test ]
@@ -102,8 +94,6 @@ Il existe aussi le mot clé`until`, qui est l'exact inverse de`while`. Il signif
 
 Remplacez juste`while`par`until`dans le code précédent pour l'essayer.
 
-
-
 #### En résumé
 
 - Pour exécuter une série de commandes plusieurs fois, on utilise des boucles.
@@ -115,3 +105,27 @@ Remplacez juste`while`par`until`dans le code précédent pour l'essayer.
 - `for`permet
    de boucler sur une série de valeurs définies. À l'intérieur de la 
   boucle, une variable prend successivement les valeurs indiquées.
+
+Exercices :
+
+**la seule façon pour vraiment apprendre la
+ programmation de scripts est d'écrire des
+ scripts**.
+
+1. Les administrateurs système écrivent souvent des scripts pour
+    automatiser certaines tâches. Donnez quelques exemples de
+    situations où de tels scripts sont utiles.
+
+2. Faire un script qui demande à l'utilisateur d'entrer le nom d'un répertoire et qui vérifie si c'en est bien un ( de dossier )
+
+3. Écrivez un script qui, lors de son exécution, donne [la date et l'heure](https://abs.traduc.org/abs-fr/ch16s03.html#dateref),
+    [la liste de tous les utilisateurs connectés](https://abs.traduc.org/abs-fr/ch17.html#whoref) et le temps passé depuis le
+    lancement du système ([uptime](https://abs.traduc.org/abs-fr/ch17.html#uptimeref)) du système. Pour terminer,
+    votre script doit [enregistrer cette information](https://abs.traduc.org/abs-fr/ch20.html#ioredirref) dans
+    un journal.
+
+4. Écrire un programme qui affiche les nombres de 1 à 199. Mais pour les multiples de 3, afficher “Fizz” au lieu du nombre et pour les multiples de 5 afficher “Buzz”. Pour les nombres multiples de 3 et 5, afficher “FizzBuzz”.
+
+5. Ecrire un script qui crée des miniatures dans un dossier plein de photo, et génère une page html correspondante.
+
+
