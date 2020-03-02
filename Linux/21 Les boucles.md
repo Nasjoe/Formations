@@ -111,15 +111,14 @@ condition de départ ; test de la boucle, action de fin de boucle.
 
 - Pour exécuter une série de commandes plusieurs fois, on utilise des boucles.
 
-- `while`permet
-   de boucler tant qu'une condition est remplie. Le fonctionnement des 
-  conditions dans les boucles est le même que celui des blocs`if`découverts dans le chapitre précédent.
+- `while`permet de boucler tant qu'une condition est remplie. Le fonctionnement des conditions dans les boucles est le même que celui des blocs`if`découverts dans le chapitre précédent.
 
-- `for`permet
-   de boucler sur une série de valeurs définies. À l'intérieur de la 
+- `for`permet de boucler sur une série de valeurs définies. À l'intérieur de la 
   boucle, une variable prend successivement les valeurs indiquées.
 
 - pour aller plus loin, beaucoup plus loin : https://abs.traduc.org/abs-fr/
+
+
 
 Exercices :
 
@@ -127,21 +126,17 @@ Exercices :
  programmation de scripts est d'écrire des
  scripts**.
 
-1. Les administrateurs système écrivent souvent des scripts pour
-    automatiser certaines tâches. Donnez quelques exemples de
-    situations où de tels scripts sont utiles.
+1. Faire un script qui demande à l'utilisateur d'entrer le nom d'un répertoire et qui vérifie si c'en est bien un ( de dossier )
 
-2. Faire un script qui demande à l'utilisateur d'entrer le nom d'un répertoire et qui vérifie si c'en est bien un ( de dossier )
-
-3. Écrivez un script qui, lors de son exécution, donne [la date et l'heure](https://abs.traduc.org/abs-fr/ch16s03.html#dateref),
+2. Écrivez un script qui, lors de son exécution, donne [la date et l'heure](https://abs.traduc.org/abs-fr/ch16s03.html#dateref),
     [la liste de tous les utilisateurs connectés](https://abs.traduc.org/abs-fr/ch17.html#whoref) et le temps passé depuis le
     lancement du système ([uptime](https://abs.traduc.org/abs-fr/ch17.html#uptimeref)) du système. Pour terminer,
     votre script doit [enregistrer cette information](https://abs.traduc.org/abs-fr/ch20.html#ioredirref) dans
     un journal.
 
-4. Écrire un programme qui affiche les nombres de 1 à 199. Mais pour les multiples de 3, afficher “Fizz” au lieu du nombre et pour les multiples de 5 afficher “Buzz”. Pour les nombres multiples de 3 et 5, afficher “FizzBuzz”.
+3. Écrire un programme qui affiche les nombres de 1 à 199. Mais pour les multiples de 3, afficher “Fizz” au lieu du nombre et pour les multiples de 5 afficher “Buzz”. Pour les nombres multiples de 3 et 5, afficher “FizzBuzz”.
 
-5. Créez un générateur de miniature html : 
+4. Créez un générateur de miniature html : 
    
    - Copiez une dizaine de photo de chat ou autre depuis google
    
