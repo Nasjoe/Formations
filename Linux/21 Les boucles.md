@@ -97,8 +97,15 @@ Remplacez juste`while`par`until`dans le code précédent pour l'essayer.
 ### Un FOR un peu plus technique :
 
 ```bash
-
+for((nr=1; nr<10; nr++))
+do
+	echo $nr
+done
 ```
+
+Dans les parenthèses du `for`, nous avons trois éléments séparés par un ;
+
+condition de départ ; test de la boucle, action de fin de boucle.
 
 #### En résumé
 
@@ -132,4 +139,20 @@ Exercices :
 
 4. Écrire un programme qui affiche les nombres de 1 à 199. Mais pour les multiples de 3, afficher “Fizz” au lieu du nombre et pour les multiples de 5 afficher “Buzz”. Pour les nombres multiples de 3 et 5, afficher “FizzBuzz”.
 
-5. Ecrire un script qui crée des miniatures dans un dossier plein de photo, et génère une page html correspondante.
+5. Créez un générateur de miniature html : 
+   
+   - Copiez une dizaine de photo de chat ou autre depuis google
+   
+   - Renommez les
+   
+   - Générez une miniature de 100 de largeur max tout en gardant le ratio 
+   
+   - Copiez ces miniatures dans un dossier 
+   
+   - Créez un fichier html qui coporte le code d'affichage
+   
+   - Poussez le projet sur un serveur web en ssh
+
+
+
+
