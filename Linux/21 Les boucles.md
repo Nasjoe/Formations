@@ -119,6 +119,8 @@ condition de départ ; test de la boucle, action de fin de boucle.
    de boucler sur une série de valeurs définies. À l'intérieur de la 
   boucle, une variable prend successivement les valeurs indiquées.
 
+- pour aller plus loin, beaucoup plus loin : https://abs.traduc.org/abs-fr/
+
 Exercices :
 
 **la seule façon pour vraiment apprendre la
