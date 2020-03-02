@@ -130,7 +130,7 @@ Exercices :
 
 2. Écrivez un script qui, lors de son exécution, donne [la date et l'heure](https://abs.traduc.org/abs-fr/ch16s03.html#dateref),
     [la liste de tous les utilisateurs connectés](https://abs.traduc.org/abs-fr/ch17.html#whoref) et le temps passé depuis le
-    lancement du système ([uptime](https://abs.traduc.org/abs-fr/ch17.html#uptimeref)) du système. Pour terminer,
+    lancement du système ([uptime](https://abs.traduc.org/abs-fr/ch17.html#uptimeref)). Pour terminer,
     votre script doit [enregistrer cette information](https://abs.traduc.org/abs-fr/ch20.html#ioredirref) dans
     un journal.
 
@@ -146,7 +146,7 @@ Exercices :
    
    - Copiez ces miniatures dans un dossier 
    
-   - Créez un fichier html qui coporte le code d'affichage
+   - Créez un fichier html qui affiche les miniature
    
    - Poussez le projet sur un serveur web en ssh
 
