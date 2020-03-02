@@ -94,6 +94,12 @@ Il existe aussi le mot clé`until`, qui est l'exact inverse de`while`. Il signif
 
 Remplacez juste`while`par`until`dans le code précédent pour l'essayer.
 
+### Un FOR un peu plus technique :
+
+```bash
+
+```
+
 #### En résumé
 
 - Pour exécuter une série de commandes plusieurs fois, on utilise des boucles.
@@ -127,5 +133,3 @@ Exercices :
 4. Écrire un programme qui affiche les nombres de 1 à 199. Mais pour les multiples de 3, afficher “Fizz” au lieu du nombre et pour les multiples de 5 afficher “Buzz”. Pour les nombres multiples de 3 et 5, afficher “FizzBuzz”.
 
 5. Ecrire un script qui crée des miniatures dans un dossier plein de photo, et génère une page html correspondante.
-
-
