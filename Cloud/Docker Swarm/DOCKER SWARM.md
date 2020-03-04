@@ -156,7 +156,7 @@ Traefik est un reverse-proxy. Il administre les requetes en fonction du nom de d
    
    ```bash
    docker-machine ssh manager "docker service create \
-       --name traefik:1.7 \
+       --name traefik \
        --constraint=node.role==manager \
        --publish 80:80 --publish 8080:8080 \
        --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
