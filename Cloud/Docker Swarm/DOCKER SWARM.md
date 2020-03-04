@@ -42,18 +42,20 @@ Pour plus d'info sur l'election : https://www.aneo.eu/2018/02/06/lorchestration-
 
 ### Création du cluster :
 
-1. Télécharger l'iso boot2docker pour virtualbox :
+1. Installer docker-machine : https://docs.docker.com/machine/install-machine/
 
+2. Télécharger l'iso boot2docker pour virtualbox :
+   
     https://github.com/boot2docker/boot2docker/releases/tag/v18.06.1-ce
-
+   
     On utilise ici la version 18.06.1-ce car la *lattest* est buggé avec virtualbox. Elle n'ouvre pas les ports automatiquement (https://forums.docker.com/t/get-started-part-4-connection-refused-from-node-on-virtual-machine/62511/10)
-
+   
    Sous windows, suivre le tuto suivant pour configurer Hyper-V : https://docs.docker.com/machine/drivers/hyper-v/#3-reboot
 
-2. Créer le manager avec docker-machine:
-
+3. Créer le manager avec docker-machine:
+   
    docker-machine est un outil qui permet de creer des machines virtuelles a la volée. Il supporte pas mal de *driver* VM, comme virtualbox, quemu, lxc, et sous windows : hyper-v.
-
+   
    ```bash
     docker-machine create --driver virtualbox --virtualbox-boot2docker-url ./ISO/boot2docker.iso manager
    
@@ -61,8 +63,8 @@ Pour plus d'info sur l'election : https://www.aneo.eu/2018/02/06/lorchestration-
     docker-machine create -d hyperv --hyperv-boot2docker-url "boot2docker.iso" --hyperv-virtual-switch "Primary Virtual Switch" manager
    ```
 
-3. Créer les noeuds :
-
+4. Créer les noeuds :
+   
    ```bash
     docker-machine create --driver virtualbox --virtualbox-boot2docker-url ./ISO/boot2docker.iso worker1
     docker-machine create --driver virtualbox --virtualbox-boot2docker-url ./ISO/boot2docker.iso worker2
@@ -72,18 +74,18 @@ Pour plus d'info sur l'election : https://www.aneo.eu/2018/02/06/lorchestration-
     docker-machine create -d hyperv --hyperv-boot2docker-url "boot2docker.iso" --hyperv-virtual-switch "Primary Virtual Switch" worker2
    ```
 
-4. Initialiser le cluster :
-
+5. Initialiser le cluster :
+   
    ```bash
    docker-machine ssh manager "docker swarm init \
        --listen-addr $(docker-machine ip manager) \
        --advertise-addr $(docker-machine ip manager)"
-       
+   
    # Sous Windows, virer les \
    ```
 
-5. Récuperer le token du cluster :
-
+6. Récuperer le token du cluster :
+   
    ```bash
    export worker_token=$(docker-machine ssh manager "docker swarm \
    join-token worker -q")
@@ -92,8 +94,8 @@ Pour plus d'info sur l'election : https://www.aneo.eu/2018/02/06/lorchestration-
    $worker_token=$(docker-machine ssh manager "docker swarm join-token worker -q")
    ```
 
-6. Joindre les noeuds dans le cluster :
-
+7. Joindre les noeuds dans le cluster :
+   
    ```bash
    docker-machine ssh worker1 "docker swarm join \
        --token=${worker_token} \
@@ -106,18 +108,18 @@ Pour plus d'info sur l'election : https://www.aneo.eu/2018/02/06/lorchestration-
        --listen-addr $(docker-machine ip worker2) \
        --advertise-addr $(docker-machine ip worker2) \
        $(docker-machine ip manager)"
-       
+   
    # Merdows : Virer les \
    ```
 
-7. Vérifier que tout s'est bien passé :
-
+8. Vérifier que tout s'est bien passé :
+   
    ```bash
    docker-machine ssh manager "docker node ls"
    ```
 
-8. Ajoutons quelques outils qui permettent de visualiser plus joliment notre cluster :
-
+9. Ajoutons quelques outils qui permettent de visualiser plus joliment notre cluster :
+   
    ```bash
    docker-machine ssh manager "docker service create \
      --name=viz \
@@ -126,11 +128,11 @@ Pour plus d'info sur l'election : https://www.aneo.eu/2018/02/06/lorchestration-
      --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
      dockersamples/visualizer"
    ```
-
+   
    Récupérons l'adresse ip du manager et allons voir du coté du port 5050. Visualizer est un outils relativement simple.
-
+   
    Pour une orchestration un peu plus poussée en GUI, nous pouvons utiliser Portainer :
-
+   
    ```bash
    docker-machine ssh manager "docker service create \
     --name=portainer \
@@ -145,13 +147,13 @@ Pour plus d'info sur l'election : https://www.aneo.eu/2018/02/06/lorchestration-
 Traefik est un reverse-proxy. Il administre les requetes en fonction du nom de domaine auquelles elles sont ratachées et gère les certificats SSL pour avoir du https facilement avec lets-encrypt. Pour ceux qui connaissent, c'est un peu le nginx-jwilder-letsencrypt boosté et moderne car il gère, , entre autre, le load-balancing. De plus, Il s'integre parfaitement à l'environnement docker et swarm. 
 
 1. Créons un réseau qui ne sera utilisé que par Traefik et les application front qui utilisent le port HTTP.
-
+   
    ```bash
    docker-machine ssh manager "docker network create --driver=overlay traefik-net"
    ```
 
 2. Déploiement de Traefik :
-
+   
    ```bash
    docker-machine ssh manager "docker service create \
        --name traefik \
@@ -168,7 +170,7 @@ Traefik est un reverse-proxy. Il administre les requetes en fonction du nom de d
    ```
 
 3. Lançons quelques applications pour tester notre reverse-proxy. Ici, on va utiliser un simple serveur web écrit en Go : **whoami**.  Lançons deux instances pour voir comment se comporte le **swarm**.
-
+   
    ```bash
    docker-machine ssh manager "docker service create \
        --name whoami0 \
@@ -183,26 +185,26 @@ Traefik est un reverse-proxy. Il administre les requetes en fonction du nom de d
        --label traefik.backend.loadbalancer.sticky=true \
        containous/whoami"
    ```
-
+   
         Notez le `--label traefik.backend.loadbalancer.stickiness=true` .
 
 4. Vérifions que tout s'est bien déroulé :
-
+   
    ```bash
    docker-machine ssh manager "docker service ls"
    ```
 
 5. Lançons nos requetes http pour tester Traefik :
-
+   
    Ici, nous allons utiliser curl qui va nous permettre de simuler une requete lié à un nom de domaine. En production, il faudra configurer nos redirections DNS.
-
+   
    ```bash
    curl -H Host:whoami0.traefik http://$(docker-machine ip manager)
    curl -H Host:whoami1.traefik http://$(docker-machine ip manager)
    ```
-
+   
    Mais ne nons arretons pas la ! Traefik sait gerer toute les requetes, même celles qui sont adréssées directement aux noeuds ! 
-
+   
    ```bash
    curl -H Host:whoami0.traefik http://$(docker-machine ip worker0)
    curl -H Host:whoami0.traefik http://$(docker-machine ip worker1)
@@ -211,7 +213,7 @@ Traefik est un reverse-proxy. Il administre les requetes en fonction du nom de d
    ```
 
 6. Utilisons la puissance de Docker-Swarm : **Le Scalling** !
-
+   
    ```bash
    docker-machine ssh manager "docker service scale whoami0=5"
    docker-machine ssh manager "docker service scale whoami1=5"
@@ -221,19 +223,19 @@ Traefik est un reverse-proxy. Il administre les requetes en fonction du nom de d
    docker-machine ssh worker1 "docker ps"
    docker-machine ssh worker2 "docker ps"
    ```
-
+   
    Et lançons dans tout les sens :
-
+   
    ```bash
    curl -H Host:whoami0.traefik http://$(docker-machine ip manager)
    ```
 
 7. Gérons les Sessions.
-
+   
    Alors oui, c'est un peu le bordel la. Si un utilisateur unique surf sur notre site, c'est un conteneur différent qui gère chacune de ses requetes. ça risque d'etre le bordel si ya des données de séssions à garder non ?
-
+   
    Et hop, le Stickyness de tout à l'heure va nous être utile !  Simulons un comportement normal de navigateur web qui enregistre les cookie avec curl. Puis utilisons ce cookie à nouveau :
-
+   
    ```bash
    # Stockons le cookie dans un fichier :
    curl -c ./cookie.txt -H Host:whoami1.traefik http://$(docker-machine ip manager)
@@ -244,7 +246,7 @@ Traefik est un reverse-proxy. Il administre les requetes en fonction du nom de d
 ![MAGIC](https://i.giphy.com/ujUdrdpX7Ok5W.giff)
 
 8. Nettoyage :
-
+   
    ```bash
    #Suppression des machines virtuelles
    docker-machine rm manager worker1 worker2
