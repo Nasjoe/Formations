@@ -209,3 +209,11 @@ Le paramètre `-R` existe aussi pour `chmod`. Si vous affectez des droits sur un
 - Certaines commandes ne fonctionnent que lorsqu'on est root et nécessitent donc de se transformer en root à l'aide de `sudo`. C'est le cas de la commande d'ajout d’utilisateur (`adduser`), de suppression d'utilisateur (`deluser`) ou encore de changement de propriétaire d'un fichier (`chown`).
 
 - On peut modifier les droits d'accès à un fichier avec `chmod`. Il existe trois types de droits : `r` (droit de lecture), `w` (droit d'écriture) et `x` (droit d'exécution).
+
+# TP :
+Créér un utilisateur par stagiaire.
+Créer un dossier Dropbox ( -w- ), un dossier Partage ( rw - ), un dossier Archive ( r-- ).
+Faire en sorte qu'il soit visible dans chaque dossier personnel de chaque utilisateur.
+
+Optionel :
+Récuperer la clef ssh publique de chaque user et lui permettre de s'y connecter avec.
