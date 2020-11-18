@@ -75,7 +75,58 @@ Pour mettre a jour TOUS les paquets :
     apt-get upgrade
     
 
-### En résumé
+## dpkg
+
+dpkg est le programme de base qui permet d'installer les paquets deb.
+    
+    dpkg -i programme.deb
+    
+Personnellement, je ne l'utilise pas car il gère très mal les dépendances. Je lui préfère gdebi
+
+    gdebi -i programme.deb
+
+## Appimage
+
+https://fr.wikipedia.org/wiki/AppImage
+AppImage est un format d'application portable développé pour Linux. Il permet d'installer et de lancer des applications sans avoir accès aux droits de superutilisateur.     
+
+Il vise à simplifier le déploiement d'applications pour Linux : en n'exigeant pas les droits de superutilisateur pour l'installation, en embarquant les bibliothèques nécessaires à l'application dans le fichier AppImage, etc..
+
+Cette alternative peut être utilisée pour utiliser un programme depuis n'importe quelle distribution Linux sans avoir à se soucier des dépendances ou de la compatibilité avec le système d'exploitation. 
+
+## Snap
+
+Avec le format snap, pour recevoir des nouvelles versions de logiciels, les utilisateurs n'auront plus à mettre en jeu la stabilité de leur système par l'ajout de dépôts personnels (PPA). Ils pourront récupérer un paquet .snap distribué par l'éditeur via le gestionnaire de paquets Snappy. 
+L'application s'exécute ensuite de manière isolée, ce qui accroît la stabilité et la sécurité du système. 
+Le paquet .snap inclut l'application et peut contenir aussi ses dépendances ; en contrepartie d'un paquet plus lourd. 
+Ceux-ci peuvent donc faire cohabiter plusieurs versions de mêmes dépendances au sein d'un même système Linux et en facilite la distribution en ligne et hors ligne.
+
+Les paquets .snap ne remplacent pas les paquets .deb classiques : le cœur du système Ubuntu (noyau, environnements graphiques, logiciels de base) continue d'être géré à l'aide des paquets issus de Debian. 
+
+    snap info <nom-du-programme>
+    sudo snap install nom_du_snap
+    
+Notamment, il peut-être intéressant d'utiliser l'option –classic qui évite le confinement et permet par exemple d'imprimer sur les imprimantes disponibles):
+
+    sudo snap install --classic nom_du_snap 
+
+Quelques Logiciels disponibles sous Snap, en tapant :
+
+    snap find
+
+Liste des logiciels installés sur votre ordinateur, en tapant :
+
+    snap list
+
+
+## Scripts d'install
+
+Beaucoup d'éditeurs proposent d'installer leur programme avec script bash. Ce qui est en soit une solution pratique peut se révéler dangereux si vous ne savez pas ce qu'il y a dans le bash... Réfléchissez y !
+
+## TP : 
+installer Teamviewer, discord, sublime-text, docker, stacer, byobu, UltraScreen, Spotify, Gimp, keepassxc, skype, vlc
+
+## En résumé
 
 * La plupart des distributions Linux proposent un moyen centralisé de télécharger et d'installer des logiciels facilement. L'installation de programmes y est généralement beaucoup plus simple que sous Windows !
 * Sous Ubuntu, on peut utiliser des interfaces graphiques pour télécharger et installer des logiciels. En console, on fait appel au programme ```apt-get```.

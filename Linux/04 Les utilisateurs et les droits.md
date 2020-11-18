@@ -54,10 +54,14 @@ Chaque user appartient à un groupe. Si vous ne définissiez rien, un groupe du 
 
 - **-a** : Garde les précédents groupe, et ajoute ex : usermod -aG amis Patrick
 
+
 Faites très attention en utilisant `usermod` ! Lorsque vous avez recours à `-G`, l'utilisateur change de groupe et ce peu importe les groupes auxquels il appartenait auparavant.  
 Si vous voulez **ajouter** des groupes à un utilisateur (sans perdre les groupes auxquels il appartenait avant cela), utilisez `-a` :  
 `usermod -aG amis patrick`
 
+Ou, mieux :
+
+#### `adduser user groupe`
 
 
 #### `delgroup` : supprimer un groupe
