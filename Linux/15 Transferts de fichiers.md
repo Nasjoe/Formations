@@ -23,6 +23,15 @@ scp -P 16296 mateo21@85.123.10.201:image.png .
 
 En interface graphique. Gère le sftp. C'est a dire le FTP via SSH.
 
+## Encore plus simple : Croc : un outil méconnu mais surpuissant
+
+
+Il fonctionne en ligne de commande mais est tout simple. Il suffit de faire croc send /votre/fichier /un/autre/fichier /et/pourquoi/pas/un/dossier/ . À ce moment-là, il vous apparaitra trois mots plus ou moins aléatoire qu'il faudra donner à votre destinataire.
+
+Le destinataire n'aura plus qu'à faire croc right-bucket-orlando (enfin vos 3 mots à vous) et hop ça initiera l'échange et tout. Pas d'ouverture de port, c'est très rapide (à peu près la vitesse de la connexion), c'est chiffré de bout-en-bout.
+https://lord.re/posts/196-croc-transfert-fichier-chiffre-rapide-simple/
+
+
 ## rsync : synchroniser des fichiers pour une sauvegarde
 
 `rsync` est le plus souvent utilisé pour effectuer des sauvegardes incrémentielles. 

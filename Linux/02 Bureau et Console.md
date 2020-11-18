@@ -14,6 +14,8 @@ Nautilus
 
 ## La Console :
 
+![terminal-elistisme.jpeg](./img/terminal-elistisme.jpeg)
+
 Je sais, c'est moche, mais elle est indispensable. Pourquoi ? Parce que on peut TOUT faire avec. Tout. et beaucoup plus vite qu'avec une interface graphique.
 
 Exemple ? Compter le nombre de jpg dans un gros dossier bordelique.
