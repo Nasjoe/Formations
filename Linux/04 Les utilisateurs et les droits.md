@@ -61,7 +61,7 @@ Si vous voulez **ajouter** des groupes à un utilisateur (sans perdre les groupe
 
 Ou, mieux :
 
-#### `adduser user groupe`
+#### `adduser user groupe` : Ajoute l'utilisateur au groupe
 
 
 #### `delgroup` : supprimer un groupe
