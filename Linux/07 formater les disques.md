@@ -193,7 +193,7 @@ exemple :
 Qui monte automatiquement la 2e partition du 2e disque dur.
 Attention, Préférer les /dev/disk/by-id/
 
-Il ne faut pas oublier de créer "l'ancrage" /media/partition-plus par un sudo mkdir /media/partition-plus
+Il ne faut pas oublier de créer "l'ancrage" /media/[NOM DU DISK] par un sudo mkdir /media/[NOM DU DISK]
 
 
 ## TUTO :
