@@ -132,6 +132,8 @@ en FAT32 :
 en NTFS :
 
     sudo mkfs.ntfs -n SAMSUNG /dev/sdXY
+    -f, --fast  # Perform a quick format
+
 
 en ext4 :
     
