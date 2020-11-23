@@ -186,8 +186,10 @@ UUID=2c442228-1991-48c7-bad9-a80dfc8267cf    none            swap    sw         
     - 0 pour le swap et les partitions windows (cf. fstab) ⇒ pas de vérification.
 
 exemple :
-
+```
 /dev/sdb2 /media/partition-plus ext4 defaults 0 2
+```
+
 Qui monte automatiquement la 2e partition du 2e disque dur.
 Attention, Préférer les /dev/disk/by-id/
 
