@@ -8,6 +8,31 @@ Le terme système de fichiers (abrégé « FS » pour File System1, parfois file
 - soit l'organisation des fichiers au sein d'un volume physique ou logique, qui peut être de différents types 
 (par exemple NTFS, FAT, FAT32, ext2fs, ext3fs, ext4fs, zfs, btrfs, etc.), et qui a également une racine mais peut en avoir plusieurs.
 
+## MBR
+
+Le master boot record ou MBR (parfois aussi appelé zone amorce ou enregistrement d'amorçage maître1) est le nom donné au premier secteur adressable d'un disque dur (cylindre 0, tête 0 et secteur 1, ou secteur 0 en adressage logique) dans le cadre d'un partitionnement Intel. 
+
+Sa taille est de 512 octets. Le MBR contient la table des partitions (les quatre partitions primaires) du disque dur. 
+Il contient également une routine d'amorçage dont le but est de charger le système d'exploitation, ou le chargeur d'amorçage (boot loader) s'il existe, présent sur la partition active. 
+Sous Linux, l'utilitaire Boot-Repair permet de restaurer le MBR.
+
+Sous UNIX et Linux, la commande dd permet de copier n'importe quelle portion d'un fichier. On peut donc l'utiliser pour sauvegarder le MBR d'un disque, ou pour le restaurer. Celui-ci se trouve sur les 512 premiers octets du disque.
+
+Cette opération est risquée, si l'utilisateur se trompe de disque à copier ou a restaurer. Par exemple, restaurer le MBR d'un disque dur sur un autre disque, remplacera la table des partitions du second disque par celle du premier. Il y a de fortes chances que votre second disque soit alors illisible. La seule exception à cette règle concerne le cas où les deux disques durs sont les mêmes ainsi que leur partitionnement (cas fréquent dans un parc de machines en entreprise).
+
+Dans l'exemple qui suit, on sauve le MBR du disque sda dans un fichier nommé boot.mbr à l'aide de la commande dd :
+
+    dd if=/dev/sda of=boot.mbr bs=512 count=1
+
+On le restaure de cette manière (boot.mbr est le fichier qui a été sauvegardé ci-dessus) :
+
+    dd if=boot.mbr of=/dev/sda bs=512 count=1 
+
+### Avenir du MBR
+Du fait de ses limitations — il ne gère pas les disques de plus de 2,199 To (en secteurs de 512 octets).
+Le système de partitions MBR est remplacé la plupart du temps depuis 2013 par le système GPT.
+
+
 ## GUID Partition Table
 
 Dans le domaine du matériel informatique, une table de partitionnement GUID, en anglais GUID Partition Table (GPT) 
@@ -58,6 +83,27 @@ Les systèmes de fichiers à snapshot, ou, en français, instantanés, offrent l
 - SMB ou Server Message Block (Windows) (Linux, BSD et Mac OS X via Samba)
 - CIFS (Évolution de SMB, géré par Samba ainsi que par Windows 2000 et XP)
 
+
+# FORMATER 
+
+## Créer les partition :
+    
+gdisk - Interactive GUID partition table (GPT) manipulator 
+    
+    sudo gdisk /dev/sdX
+
+on tape ? pour avoir la liste des commandes.
+p : voir les partitions actuels.
+
+Pour effacer et partitionner un disque complètement :
+    
+    o : Crée une nouvelle table de partition GPT ( attention, ça supprime tout ! )
+    n : Crée un nouvelle partition. Par default, ça prend tout l'espace libre
+    w : Applique les changement.
+    q : quitte sans appliquer les changements.
+        
+Attention partitionnement ne veut pas dire formatage. On crée les partition, avec gdisk, mais on formate avec mkfs. (cf plus bas ) 
+
 ## Avec GParted, en GUI
 
     sudo apt install gparted
@@ -105,6 +151,7 @@ Montez les en sshfs sur vos machines.
 Source & ressources : 
 https://fr.wikipedia.org/wiki/Syst%C3%A8me_de_fichiers#Syst%C3%A8mes_de_fichiers_et_syst%C3%A8mes_d'exploitation_associ%C3%A9s_ou_compatibles
 https://fr.wikipedia.org/wiki/GUID_Partition_Table#Compatibilit%C3%A9_des_OS_et_GPT
+https://fr.wikipedia.org/wiki/Master_boot_record
 ```
 
 
