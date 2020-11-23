@@ -145,13 +145,14 @@ Montez la partition :
 ## TUTO :
 Créer un table de partition, créer deux partitions, et les formater : (NTFS et ext4)
 Faites des test de lecture écritures.
-Montez les en sshfs sur vos machines.
+Montez les en ```sshfs``` sur vos machines.
 
 ```
 Source & ressources : 
 https://fr.wikipedia.org/wiki/Syst%C3%A8me_de_fichiers#Syst%C3%A8mes_de_fichiers_et_syst%C3%A8mes_d'exploitation_associ%C3%A9s_ou_compatibles
 https://fr.wikipedia.org/wiki/GUID_Partition_Table#Compatibilit%C3%A9_des_OS_et_GPT
 https://fr.wikipedia.org/wiki/Master_boot_record
+https://www.malekal.com/ntfs-ext4-comprendre-systemes-de-fichiers/
 ```
 
 
