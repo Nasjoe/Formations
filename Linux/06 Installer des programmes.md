@@ -57,9 +57,9 @@ Nous devons généralement suivre trois étapes pour télécharger un paquet :
 
     apt-get update (optionnel) : pour mettre notre cache à jour si ce n'est pas déjà fait ;
 
-    apt-cache search monpaquet (optionnel) : pour rechercher le paquet que nous voulons télécharger si nous ne connaissons pas son nom exact ;
+    apt-cache search [monpaquet] (optionnel) : pour rechercher le paquet que nous voulons télécharger si nous ne connaissons pas son nom exact ;
 
-    apt-get install monpaquet : pour télécharger et installer notre paquet.
+    apt-get install [monpaquet] : pour télécharger et installer notre paquet.
 
 Si vous voulez désinstaller un paquet, vous pouvez utiliser la commandeapt-get remove :
 

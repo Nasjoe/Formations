@@ -36,6 +36,18 @@ Ne supprimez en aucun cas votre compte utilisateur ! En effet, si je le fais, i
 
 deluser --remove-home patrick
 
+Disable sudo password query
+
+Il est possible de desactiver la demande de sudo. Exemple avec protonvpn :
+
+    which protonvpn
+
+Enter ``sudo visudo`` to edit the sudoers file.
+Go to the bottom of the file and add the following line
+
+    user ALL = (root) NOPASSWD: /usr/local/bin/protonvpn
+
+Note: Make sure to replace the name user with your own username and the path with the output of the previous command
 
 
 ## Gestion des groupes
