@@ -84,4 +84,4 @@ en ext4 :
 
 Montez la partition :
 
-    udisksctl mount -b /dev/sdXY
+    sudo mount /dev/sdXY /chemin
