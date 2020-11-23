@@ -86,7 +86,7 @@ Les systèmes de fichiers à snapshot, ou, en français, instantanés, offrent l
 
 # FORMATER 
 
-## Créer les partition :
+## Créer les partitions :
     
 gdisk - Interactive GUID partition table (GPT) manipulator 
     
