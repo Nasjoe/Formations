@@ -1,6 +1,5 @@
 # Système de Fichiers
 
-Source : https://fr.wikipedia.org/wiki/Syst%C3%A8me_de_fichiers#Syst%C3%A8mes_de_fichiers_et_syst%C3%A8mes_d'exploitation_associ%C3%A9s_ou_compatibles
 
 Le terme système de fichiers (abrégé « FS » pour File System1, parfois filesystem en anglais) désigne de façon ambigüe :
 
@@ -8,6 +7,16 @@ Le terme système de fichiers (abrégé « FS » pour File System1, parfois file
 (on parle par exemple du file system d'une machine unix organisé à partir de sa racine (/) )
 - soit l'organisation des fichiers au sein d'un volume physique ou logique, qui peut être de différents types 
 (par exemple NTFS, FAT, FAT32, ext2fs, ext3fs, ext4fs, zfs, btrfs, etc.), et qui a également une racine mais peut en avoir plusieurs.
+
+## GUID Partition Table
+
+Dans le domaine du matériel informatique, une table de partitionnement GUID, en anglais GUID Partition Table (GPT) 
+est un standard pour décrire la table de partitionnement d'un disque dur. 
+
+Bien qu'il fasse partie du standard EFI Extensible Firmware Interface (qu'Intel propose en remplacement du PC BIOS), 
+il est aussi utilisé sur certains BIOS à cause des limitations de la table de partitionnement du MBR qui limite la taille des partitions à 2,2 To (2 41 octets)1. 
+
+GPT gère les disques durs et partitions jusqu'à 9,4 Zo (9,4 × 1021 octets ou 9,4 trilliards d'octets soit 9,4 × 109 To ou 2 73 octets)1,2. 
 
 ## Les differents systèmes :
 
@@ -91,3 +100,11 @@ Montez la partition :
 Créer un table de partition, créer deux partitions, et les formater : (NTFS et ext4)
 Faites des test de lecture écritures.
 Montez les en sshfs sur vos machines.
+
+```
+Source & ressources : 
+https://fr.wikipedia.org/wiki/Syst%C3%A8me_de_fichiers#Syst%C3%A8mes_de_fichiers_et_syst%C3%A8mes_d'exploitation_associ%C3%A9s_ou_compatibles
+https://fr.wikipedia.org/wiki/GUID_Partition_Table#Compatibilit%C3%A9_des_OS_et_GPT
+```
+
+
