@@ -85,3 +85,9 @@ en ext4 :
 Montez la partition :
 
     sudo mount /dev/sdXY /chemin
+
+
+## TUTO :
+Créer un table de partition, créer deux partitions, et les formater : (NTFS et ext4)
+Faites des test de lecture écritures.
+Montez les en sshfs sur vos machines.
