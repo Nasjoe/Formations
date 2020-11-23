@@ -143,7 +143,7 @@ Montez la partition :
 
 
 ## TUTO :
-Créer un table de partition, créer deux partitions, et les formater : (NTFS et ext4)
+Créer une table de partition, créer deux partitions, et les formater : (NTFS et ext4)
 Faites des test de lecture écritures.
 Montez les en ```sshfs``` sur vos machines.
 
