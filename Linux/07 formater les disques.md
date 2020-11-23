@@ -134,9 +134,11 @@ en NTFS :
     sudo mkfs.ntfs -n SAMSUNG /dev/sdXY
 
 en ext4 :
-
-    sudo mkfs.ext4 -n SAMSUNG /dev/sdXY
-
+    
+    attention, ext4 ne semble pas prendre le flag ( -n )
+    sudo mkfs.ext4 /dev/sdXY
+    
+   
 Montez la partition :
 
     sudo mount /dev/sdXY /chemin
