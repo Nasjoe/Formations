@@ -1,5 +1,17 @@
 # Formater des disques
 
+## Avec GParted, en GUI
+
+    sudo apt install gparted
+    sudo gparted
+    sudo gparted /dev/sdX
+    
+    tuto ici :
+    https://doc.ubuntu-fr.org/gparted
+    
+
+## A la console :
+
 Identifiez le nom de la partition à formater (ex. : sda1) grâce à cette commande avancée basée sur lsblk :
 
     lsblk -o model,name,type,fstype,size,label
