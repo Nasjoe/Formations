@@ -2,7 +2,7 @@
 
 ## wget : Télécharger sur le net 
 
-`wget http://cdimage.debian.org/debian-cd/4.0_r5/i386/iso-cd/ debian-40r5-i386-businesscard.iso`
+`wget http://cdimage.debian.org/debian-cd/4.0_r5/i386/iso-cd/debian-40r5-i386-businesscard.iso`
 
 `-c` pour faire du resume.
 

@@ -4,6 +4,7 @@
 
 ---
 
+TODO: https://korben.info/present-des-vrais-slides-de-barbu-e-s.html
 
 
 ## Un peu d'histoire :
