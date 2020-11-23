@@ -61,5 +61,15 @@ Parfois, l'utilité de certaines commandes seules peut paraître limitée, mais 
 
 EXO :
 Trier les répertoires par la taille avec ```du```
+Ne voir que les premiers ( les plus gros )
+Ne voir que les derniers ( les plus petits )
+Sortir son adresse ip locale d'un coup
 
+
+En résumé
+- Au lieu d'afficher le résultat d'une commande dans une console, il est possible de l'enregistrer dans un fichier. Il suffit d'ajouter le symbole > suivi du nom du fichier à la fin de la commande. Par exemple ls > liste_fichiers.txt enregistre la liste des fichiers dans un fichier plutôt que de l'afficher en console.
+- Le symbole>> enregistre à la fin du fichier au lieu de l'écraser s'il existe déjà.
+- Les symboles 2> et 2>> permettent de rediriger seulement les erreurs dans un fichier. Quant à 2>&1 il redirige les erreurs dans le même fichier que les messages normaux.
+- < permet de lire des données depuis un fichier et de les envoyer à une commande, tandis que << lit les données depuis le clavier.
+- Le symbole | combine des commandes : les données de la commande à sa gauche sont envoyées à la commande à sa droite. Ainsi, du | sort -nr récupère la liste des fichiers avec leur taille et l'envoie à sort pour qu'il la trie.
 
