@@ -6,8 +6,7 @@
     sudo gparted
     sudo gparted /dev/sdX
     
-    tuto ici :
-    https://doc.ubuntu-fr.org/gparted
+tuto ici : https://doc.ubuntu-fr.org/gparted
     
 
 ## A la console :
