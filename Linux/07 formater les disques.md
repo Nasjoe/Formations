@@ -146,10 +146,62 @@ Montez la partition :
     sudo mount /dev/sdXY /chemin
 
 
+## Le fichier fstab (montage automatique)
+Source : https://doc.ubuntu-fr.org/mount_fstab
+
+Le fichier /etc/fstab liste les partitions qui seront montées automatiquement au démarrage ou à la connexion du périphérique, avec toujours les mêmes options.
+Il est composé de plusieurs lignes décrivant chacune les conditions de montage de chaque partition / système de fichier.
+
+Le fichier /etc/fstab suivant résume une configuration classique : 
+
+
+```
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+# / was on /dev/sda7 during installation
+UUID=33b870b8-a81e-4203-a4fd-7affa9f412fb    /               ext4    errors=remount-ro 0       1
+# /boot was on /dev/sda5 during installation
+UUID=c3cc32c0-b4bd-49f6-b23c-35fed37adea5    /boot           ext2    defaults        0       2
+# /home was on /dev/sda8 during installation
+UUID=c2d386a1-c2f9-4d2f-957a-65a5d9b4c4d7    /home           ext4    defaults        0       2
+# swap was on /dev/sda6 during installation
+UUID=2c442228-1991-48c7-bad9-a80dfc8267cf    none            swap    sw              0       0
+```
+
+- La colonne <file system> indique la partition elle-même. Il y a plusieurs solutions, mais les 2 principales sont :
+    - l'UUID (Universal Unique Identifier) de la partition. Celle-ci sera obtenue via un sudo blkid, via gnome-disk, ou via gparted. Un UUID ressemble à cela UUID=2c442228-1991-48c7-bad9-a80dfc8267cf
+    - la référence directe à la partition sous la forme /dev/sda2 ou /dev/sdb2 (sd signifie disque dur, la lettre est l'ordre du disque dans le boot, et le N° est celui de la partition. /dev/sdb2 est donc la 2e partition du 2e disque dur). Inconvénient de cette méthode : si vous changez le 1er disque de démarrage dans le boot, la signification de sdb2 (par exemple) changera en même temps. l'UUID est donc un identifiant plus stable et plus sûr.
+- La colonne <mount point> indique un répertoire quelconque sur la partition principale, et qui servira de point de montage. Pour la partition principale elle-même, c'est évidemment "/" (la racine). Pour une partition montée additionnelle, on choisit en général (ce n'est pas un emplacement obligatoire) un répertoire /media/xxx (où xxx est le nom que vous choisissez pour la partition de montage). Vous devez créer manuellement cette partition de montage une fois pour toutes par un sudo mkdir /media/xxx. Laissez-la vide, et n'y touchez plus jamais. Elle sert juste d'ancrage au fstab pour son montage.
+- La colonne <type> donne le type de système de fichiers de la partition montée. Pour une partition linux, c'est souvent ext4.
+- La colonne <option> permet de choisir des options au montage. Sauf si vous êtes un expert, laissez defaults pour une partition ajoutée par vous au montage.
+- La colonne <dump> règle les sauvegardes; la valeur classique est 0.
+- La colonne <pass> règle la vérification au démarrage. Laissez-y les valeurs par défaut de l'installation. Si vous ajoutez manuellement des partitions, les valeurs de <pass> doivent être:
+    - 1 pour la racine (votre partition principale),
+    - 2 pour les autres partitions Linux (les partitions "externes" que vous souhaitez monter),
+    - 0 pour le swap et les partitions windows (cf. fstab) ⇒ pas de vérification.
+
+exemple :
+
+/dev/sdb2 /media/partition-plus ext4 defaults 0 2
+Qui monte automatiquement la 2e partition du 2e disque dur.
+Attention, Préférer les /dev/disk/by-id/
+
+Il ne faut pas oublier de créer "l'ancrage" /media/partition-plus par un sudo mkdir /media/partition-plus
+
+
 ## TUTO :
 Créer une table de partition, créer deux partitions, et les formater : (NTFS et ext4)
 Faites des test de lecture écritures.
 Montez les en ```sshfs``` sur vos machines.
+
+
+
+
 
 ```
 Source & ressources : 
