@@ -208,6 +208,12 @@ Attention, Préférer les /dev/disk/by-id/
 Il ne faut pas oublier de créer "l'ancrage" /media/[NOM DU DISK] par un sudo mkdir /media/[NOM DU DISK]
 
 
+## Récuperer ses données effacés ou apres un crash disk :
+
+https://linuxfr.org/news/ddrescue-dd_rescue-myrescue-recuperer-ses-donnees-apres-un-crash-disque
+
+et le magique ```testdisk```
+
 ## TUTO :
 Créer une table de partition, créer deux partitions, et les formater : (NTFS et ext4)
 Faites des test de lecture écritures.
