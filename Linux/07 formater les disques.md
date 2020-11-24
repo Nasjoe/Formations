@@ -145,6 +145,18 @@ Montez la partition :
 
     sudo mount /dev/sdXY /chemin
 
+## Verifier les disques.
+
+Les infos smarts sont inscrit en dur sur le disque. 
+On peut tester la santé avec deux tests. Short et Long :
+
+    smartctl -t short /dev/sdb
+    smartctl -t long /dev/sdb
+    
+Pour lire toutes les infos d'un disque :
+
+    smartctl /dev/sdb
+    smartctl -l selftest /dev/sdb
 
 ## Le fichier fstab (montage automatique)
 Source : https://doc.ubuntu-fr.org/mount_fstab
