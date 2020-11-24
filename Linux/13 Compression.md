@@ -45,4 +45,4 @@ Pour décompresser, c'est pareil, sauf que le -c est remplacé par un -x comme t
 
 Sinon, il existe aussi 7z qui est tres puissant. Checkez la doc !
 
-    apt install p7-full
+    apt install p7zip-full
