@@ -52,7 +52,7 @@ jonathan
 
     sort noms.txt 
 
-    -o : écrire le résultat dans un fichier
+    --output=FICHIER : écrire le résultat dans un fichier
     -r : trier en ordre inverse
     -R : trier aléatoirement
     -n : trier des nombres
