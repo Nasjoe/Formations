@@ -1,4 +1,4 @@
-# Analyser le réseau et filtrer le trafic avec un pare-feu
+# Analyser le réseau
 
 Savoir paramétrer un pare-feu est essentiel, que ce soit sur votre PC à la maison ou, à plus forte raison, sur un serveur. Cela vous protège de manière efficace contre les programmes qui voudraient échanger des informations sur le réseau sans votre accord. C'est une mesure de sécurité essentielle qu'il faut connaître et dont aucun administrateur système sérieux ne peut se passer.
 
