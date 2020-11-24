@@ -93,6 +93,7 @@ Si vous redémarrez votre ordinateur, les règles `iptables` auront disparu !
 Le seul moyen pour qu'elles soient chargées au démarrage consiste à créer un script qui sera exécuté au démarrage.
 
 Sinon, plus simple : `ufw` est un programme qui permet d'automatiser quelques taches.
+https://doc.ubuntu-fr.org/ufw
 
 En résumé
 
