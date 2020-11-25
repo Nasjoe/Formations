@@ -21,7 +21,7 @@ Il est possible d'utiliser des **quotes** pour délimiter un paramètre contenan
 
 - les guillemets " " (doubles quotes) ;
 
-- les accents graves ` ` ` (back quotes), qui s'insèrent avec `Alt Gr + 7` sur un clavier AZERTY français.
+- les accents graves (back quotes), qui s'insèrent avec `Alt Gr + 7` sur un clavier AZERTY français.
 
 ```bash
 message='Bonjour tout le monde'
