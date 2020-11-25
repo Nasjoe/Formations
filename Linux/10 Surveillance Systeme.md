@@ -37,6 +37,10 @@ Pour vous en servir, il faudra auparavant récupérer le ```PID``` du ou des pro
 Pour cela, deux solutions :
 
     ps -u $USER | grep firefox
+        -a processus avec tty
+        -x processus sans tty
+        -u affiche l'user
+    
     kill 32678 # Termine 'proprement'
     kill -9 # Termine 'sallement'
 
