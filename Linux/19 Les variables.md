@@ -31,7 +31,7 @@ echo "Le message est : $message"
 
 ```bash
 cmd=`pwd`
-echo "vous êtes dans le dossier $message"
+echo "vous êtes dans le dossier $cmd"
 ```
 
 ### read : demander une saisie
