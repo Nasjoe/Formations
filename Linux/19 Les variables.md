@@ -21,7 +21,7 @@ Il est possible d'utiliser des **quotes** pour délimiter un paramètre contenan
 
 - les guillemets " " (doubles quotes) ;
 
-- les accents graves ` ` (back quotes), qui s'insèrent avec `Alt Gr + 7` sur un clavier AZERTY français.
+- les accents graves (back quotes), qui s'insèrent avec `Alt Gr + 7` sur un clavier AZERTY français.
 
 ```bash
 message='Bonjour tout le monde'
@@ -31,7 +31,7 @@ echo "Le message est : $message"
 
 ```bash
 cmd=`pwd`
-echo "vous êtes dans le dossier $message"
+echo "vous êtes dans le dossier $cmd"
 ```
 
 ### read : demander une saisie
@@ -138,9 +138,7 @@ paramètres. Ainsi, on pourrait appeler notre script comme ceci :
 
 `./variables.sh param1 param2 param3`
 
-Le problème, c'est que nous n'avons toujours pas vu comment récupérer ces paramètres dans notre script. Pourtant, c'est très simple à réaliser !
-
-En effet, des variables sont automatiquement créées :
+Pour les récuperer :
 
 - `$#` : contient le nombre de paramètres ;
 
@@ -167,10 +165,10 @@ On peut « décaler » les paramètres dans les variables `$1`, `$2`, etc. à 
 
 Le bash gère également les variables « tableaux ». Ce sont des variables qui contiennent plusieurs cases, comme un tableau.
 
-En python, on parle de liste ou de dictionnaire. En php on parle d'Array. Parfois aussi on parle de json.#!/bin/bash
+En python, on parle de liste ou de dictionnaire. En php on parle d'Array. Parfois aussi on parle de json.
 
 ```bash
-
+#!/bin/bash
 tableau=('valeur0' 'valeur1' 'valeur2')
 tableau[5]='valeur5'
 echo ${tableau[1]}
