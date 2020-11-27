@@ -55,3 +55,8 @@ services:
       - 8080:80
     restart: always
 ```
+puis, dans le dossier dans lequel le fichier .yml est présent :
+
+  docker-compose up
+  ou
+  docker-compose up -d
