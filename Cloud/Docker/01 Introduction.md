@@ -93,6 +93,32 @@ docker pull nginx
 ![port](https://linuxhandbook.com/content/images/2020/11/ssh-into-container.png)
 
 
+## Voir les conteneurs et les manipuler :
+
+Pour voir la liste des conteneurs sur votre machine :
+```shell
+docker ps
+docker ps -a ( affiche ceux arrétés )
+```
+
+Pour executer une action dans un conteneur :
+```shell
+docker exec <id ou name> <commande>
+```
+
+Du coup, pour "entrer" dans un conteneur, prévoir une sesssion TTY avec -ti et :
+```shell
+docker exec <id ou name> bash
+```
+
+Stopper ou supprimer un conteneur :
+```shell
+docker stop <id ou name>
+docker rm <id ou name>
+```
+
+
+
 ### Exercice :
 
 - Créer un conteneur qui affiche htop en mode "tree" une fois lancé.
