@@ -112,10 +112,15 @@ Exemple pour nginx :
 version: '3'
 services:
   web:
-    image: nginx:alpine
+    image: nginx
     volumes:
-     - ./Template:/usr/share/nginx/html
+     - ./dossier_html:/usr/share/nginx/html
     ports :
       - 8080:80
     restart: always
 ```
+puis, dans le dossier dans lequel le fichier .yml est présent :
+
+  docker-compose up
+  ou
+  docker-compose up -d
