@@ -1,4 +1,4 @@
 FROM ubuntu:latest
 RUN apt update
 RUN apt install htop
-CMD ["htop"]
+CMD ["sleep", "1d"]

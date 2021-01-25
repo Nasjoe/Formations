@@ -8,7 +8,7 @@ La para-virtualisation est une technique de virtualisation qui permet à une « 
 ## Installation :
 https://docs.docker.com/engine/install/ubuntu/
 
-## Qu'esce qu'un conteneur
+## Qu’es-ce qu'un conteneur
 ![conteneur](https://blog.webnet.fr/wp-content/uploads/2020/03/VM-vs-Docker.png)
 
 Il existe deux sortes de conteneurs :
@@ -48,7 +48,8 @@ https://docs.docker.com/engine/reference/builder/
 FROM ubuntu:latest
 RUN apt update
 RUN apt upgrade -y
-CMD ["echo", "hello world"]
+COPY coucou.txt coucou.txt
+CMD ["cat", "coucou.text"]
 ```
 
 
@@ -71,6 +72,7 @@ Une fois l'image créée, nous pouvons lancer autant de conteneur avec que l'on 
 
 ```shell
 docker run hello-world
+docker run ubuntu:latest bash
 ```
 
 Si le nom de l'image n'existe pas en local, c'est a dire que vous ne l'avez pas construite (build), Docker tentera de la télécharger depuis ses dépôts (DockerHub) à lui.
@@ -117,7 +119,10 @@ docker stop <id ou name>
 docker rm <id ou name>
 ```
 
-
+inspecter un conteneur :
+```shell
+docker inspect <id ou name>
+```
 
 ### Exercice :
 
@@ -128,25 +133,3 @@ docker rm <id ou name>
 - Puis rajouter un fichier qui permet de se connecter avec des clef ssh connues.
 - Puis interdire la connexion via mot de passe.
 - Puis vérifier les log de connexion via le SDTOUT.
-
-
-## docker-compose
-
-Exemple pour nginx :
-
-```yaml
-version: '3'
-services:
-  web:
-    image: nginx
-    volumes:
-     - ./dossier_html:/usr/share/nginx/html
-    ports :
-      - 8080:80
-    restart: always
-```
-puis, dans le dossier dans lequel le fichier .yml est présent :
-
-  docker-compose up
-  ou
-  docker-compose up -d
