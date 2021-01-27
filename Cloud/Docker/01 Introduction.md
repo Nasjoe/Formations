@@ -101,14 +101,15 @@ Options possibles et courants :
 - -d : détaché. Le conteneur tourne en tache de fond
 - -ti Crée un tty interactive. Il le garde même si détaché. Obligatoire pour lancer un bash dans le conteneur et avoir la main dessus.
 - -rm : remove. Supprime le conteneur une fois la tache effectuée.
-- -v : Volume. Crée un volume partagé entre l'hote et le conteneur.  ```-v <chemin hote>:<chemin conteneur>```
+- -v : Volume. Crée un volume partagé entre l’hôte et le conteneur.  ```-v <chemin hote>:<chemin conteneur>```
 - -p : Ports. Ouvre une relation de port ( NAT, port forward ) entre l’hôte et le conteneur. format ```-p <port conteneur>:<port conteneur>```
 - -e : Variable d’environnement. Pour retrouver la même variable dans le shell du conteneur. ```-e SECRET="super_patate"```
+- --name : Pour nommer le conteneur pour mieux le retrouver.
 
 exemple, pour un conteneur qui se supprimera tout de suite après l'avoir quitté :
 
 ```shell
-docker run -ti --rm -v /home/user/partage:/partage -p 7655:22 -e SECRET="super_patate" ubuntu bash
+docker run -ti --rm --name super_conteneur -v /home/user/partage:/partage -p 7655:22 -e SECRET="super_patate" ubuntu bash
 ```
 
 
@@ -126,12 +127,12 @@ docker ps -a ( affiche ceux arrétés )
 
 Pour executer une action dans un conteneur :
 ```shell
-docker exec <id ou name> <commande>
+docker exec <id ou name du conteneur> <commande>
 ```
 
 Du coup, pour "entrer" dans un conteneur, prévoir une sesssion TTY avec -ti et :
 ```shell
-docker exec <id ou name> bash
+docker exec -ti <id ou name> bash
 ```
 
 Stopper ou supprimer un conteneur :
