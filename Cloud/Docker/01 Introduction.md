@@ -149,7 +149,7 @@ docker inspect <id ou name>
 
 ### Exercice :
 
-- Créer un conteneur qui affiche htop en mode "tree" une fois lancé.
+- Créer un conteneur qui affiche htop en mode "tree" une fois lancé. Indice : ```htop -t```
 - Créer un conteneur qui permet de partager un dossier entre l'hote et le conteneur, et qui affiche un fichier texte dans ce dossier partagé lors du lancement du conteneur.
 - Installer openssh par default dans l'image et faire en sorte qu'il se lance automatiquement au démarrage du conteneur.
 
