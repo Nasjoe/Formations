@@ -79,7 +79,7 @@ Une fois l'image créée, nous pouvons lancer autant de conteneur avec que l'on 
 
 ```shell
 docker run hello-world
-docker run ubuntu:latest bash
+docker run -ti ubuntu:latest bash
 ```
 
 Si le nom de l'image n'existe pas en local, c'est a dire que vous ne l'avez pas construite (build), Docker tentera de la télécharger depuis ses dépôts (DockerHub) à lui.
@@ -123,6 +123,7 @@ docker exec <id ou name> bash
 Stopper ou supprimer un conteneur :
 ```shell
 docker stop <id ou name>
+docker start <id ou name>
 docker rm <id ou name>
 ```
 
