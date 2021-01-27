@@ -79,6 +79,7 @@ Une fois l'image créée, nous pouvons lancer autant de conteneur avec que l'on 
 
 ```shell
 docker run hello-world
+docker run -d nginx
 docker run -ti ubuntu:latest bash
 ```
 
