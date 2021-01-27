@@ -97,6 +97,7 @@ docker pull nginx
 ```
 
 Options possibles et courants :
+
 - -d : détaché. Le conteneur tourne en tache de fond
 - -ti Crée un tty interactive. Il le garde même si détaché. Obligatoire pour lancer un bash dans le conteneur et avoir la main dessus.
 - -rm : remove. Supprime le conteneur une fois la tache effectuée.
