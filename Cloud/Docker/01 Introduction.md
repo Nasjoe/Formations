@@ -102,7 +102,7 @@ Options possibles et courants :
 - -ti Crée un tty interactive. Il le garde même si détaché. Obligatoire pour lancer un bash dans le conteneur et avoir la main dessus.
 - -rm : remove. Supprime le conteneur une fois la tache effectuée.
 - -v : Volume. Crée un volume partagé entre l'hote et le conteneur.  ```-v <chemin hote>:<chemin conteneur>```
-- -p : Ports. Ouvre un NAT entre l’hôte et le conteneur. format ```-p <port conteneur>:<port conteneur>```
+- -p : Ports. Ouvre une relation de port ( NAT, port forward ) entre l’hôte et le conteneur. format ```-p <port conteneur>:<port conteneur>```
 - -e : Variable d’environnement. Pour retrouver la même variable dans le shell du conteneur. ```-e SECRET="super_patate"```
 
 exemple, pour un conteneur qui se supprimera tout de suite après l'avoir quitté :
