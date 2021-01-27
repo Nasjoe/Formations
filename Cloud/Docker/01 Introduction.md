@@ -42,7 +42,7 @@ docker images
 La documentation :
 https://docs.docker.com/engine/reference/builder/
 
-
+pour créer une nouvelle image par nous même, de notre cru, il faut créer un dossier, puis créer a l'intérieur un fichier nommé ```dockerfile``` qui peut ressembler à ça :
 ```text
 # DOCKERFILE
 FROM ubuntu:latest
