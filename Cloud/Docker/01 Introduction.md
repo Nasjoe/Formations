@@ -42,7 +42,8 @@ docker images
 La documentation :
 https://docs.docker.com/engine/reference/builder/
 
-pour créer une nouvelle image par nous même, de notre cru, il faut créer un dossier, puis créer a l'intérieur un fichier nommé ```dockerfile``` qui peut ressembler à ça :
+pour créer une nouvelle image par nous même, comme une .ISO de notre cru, il faut créer un dossier, puis créer a l'intérieur un fichier nommé ```dockerfile``` qui peut ressembler à ça :
+
 ```text
 # DOCKERFILE
 FROM ubuntu:latest
@@ -52,6 +53,12 @@ COPY coucou.txt coucou.txt
 CMD ["cat", "coucou.text"]
 ```
 
+Il y a beaucoup de commande possible dans un dockerfile. Mais voici les principales :
+
+FROM : Depuis quelle base construisons nous notre image ? Ici, depuis une ubuntu dernière version.
+RUN : Est une ligne qui va se lancer dans l'image, pour la construire.
+COPY : Copier un fichier a depuis l'intérieur du dossier qui contiens le dockerfile, vers l'intérieur de l'image. on peut utiliser un chemin relatif.
+CMD : Quelle est la commande qui sera lancée lorsque le conteneur sera utilisé. Attention, ce n'est pas une commande qui se lance lors de la construction de l'image. Mais uniquement lorsque l'on lancera le conteneur dans le futur.
 
 Il est alors possible de construire l'image du conteneur depuis ce fichier:
 
