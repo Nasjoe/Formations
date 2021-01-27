@@ -11,6 +11,11 @@ https://docs.docker.com/engine/install/ubuntu/
 methode de feignasse, mais c'est le mal :
 https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script
 
+ne pas oublier le :
+```
+sudo usermod -aG docker $USER
+```
+
 ## Qu’es-ce qu'un conteneur
 ![conteneur](https://blog.webnet.fr/wp-content/uploads/2020/03/VM-vs-Docker.png)
 
