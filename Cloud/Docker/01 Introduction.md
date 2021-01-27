@@ -157,8 +157,17 @@ indice : pour lancer le service ssh et rester dessus, on peut utiliser :
 ```
 /usr/sbin/sshd -D
 ```
+ou 
+```
+service ssh start
+```
 
 - Rajouter un user autre que root, sans mot de passe.
 - Ouvrir un port extérieur vers le port ssh du conteneur pour que l'user créé puisse s'y connecter.
 - Rajouter un fichier qui permet de se connecter avec des clef ssh publique connues.
+
+indice : On peut monter en -v des fichiers. Pourquoi ne pas partager le fichier ```authorized_keys``` ?
+
 - Puis vérifier les logs de connexion via le SDTOUT.
+
+indice, le fichier de logs de ssh est ```/var/log/auth.log```
