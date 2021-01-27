@@ -75,7 +75,7 @@ Le ```.``` est la pour dire " ici ".
 
 Documentation : https://docs.docker.com/engine/reference/run/
 
-Une fois l'image créée, nous pouvons lancer autant de conteneur avec que l'on souhaite avec :
+Une fois l'image créée, nous pouvons lancer autant de conteneurs que l'on souhaite basé sur cette image avec :
 
 ```shell
 docker run hello-world
@@ -98,8 +98,7 @@ docker pull nginx
 
 Options possibles et courants :
 - -d : détaché. Le conteneur tourne en tache de fond
-- -t --tty : Crée un pseudo tty
-- -i --interactive : Garde le STDIN ouvert, même si détaché. On utilise -ti souvent ensemble.
+- -ti Crée un tty interactive. Il le garde même si détaché. Obligatoire pour lancer un bash dans le conteneur et avoir la main dessus.
 - -rm : remove. Supprime le conteneur une fois la tache effectuée.
 - -v : Volume. Crée un volume partagé entre l'hote et le conteneur.  ```<chemin hote>:<chemin conteneur>```
 - -p : Ports. Ouvre un NAT entre l’hôte et le conteneur. format ```<port conteneur>:<port conteneur>```
