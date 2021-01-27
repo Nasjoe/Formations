@@ -83,6 +83,11 @@ docker run -d nginx
 docker run -ti ubuntu:latest bash
 ```
 
+format :
+```
+docker run [OPTION] <nom de l'image> [COMMAND]
+```
+
 Si le nom de l'image n'existe pas en local, c'est a dire que vous ne l'avez pas construite (build), Docker tentera de la télécharger depuis ses dépôts (DockerHub) à lui.
 
 Il est possible d'aller chercher l'image sans run :
@@ -91,8 +96,8 @@ Il est possible d'aller chercher l'image sans run :
 docker pull nginx
 ```
 
-
-- -d : detaché. Le conteneur tourne en tache de fond
+Options possibles et courants :
+- -d : détaché. Le conteneur tourne en tache de fond
 - -t --tty : Crée un pseudo tty
 - -i --interactive : Garde le STDIN ouvert, même si détaché. On utilise -ti souvent ensemble.
 - -rm : remove. Supprime le conteneur une fois la tache effectuée.
