@@ -62,7 +62,7 @@ docker build -t <nom de l'image> <chemin du dockerfile>
 docker build -t nginx .
 ```
 
-
+Le ```.``` est la pour dire " ici ".
 
 ## Lancement d'un conteneur, docker run.
 
