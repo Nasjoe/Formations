@@ -8,6 +8,9 @@ La para-virtualisation est une technique de virtualisation qui permet à une « 
 ## Installation :
 https://docs.docker.com/engine/install/ubuntu/
 
+methode de feignasse, mais c'est le mal :
+https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script
+
 ## Qu’es-ce qu'un conteneur
 ![conteneur](https://blog.webnet.fr/wp-content/uploads/2020/03/VM-vs-Docker.png)
 
