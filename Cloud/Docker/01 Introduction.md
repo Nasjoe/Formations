@@ -127,14 +127,15 @@ docker inspect <id ou name>
 ### Exercice :
 
 - Créer un conteneur qui affiche htop en mode "tree" une fois lancé.
-- Créer un conteneur qui permet de partager un dossier entre l'hote et le conteneur.
-- Installer openssh par default dans l'image et faire en sorte qu'il se lance automatiquement au démmarage du conteneur.
+- Créer un conteneur qui permet de partager un dossier entre l'hote et le conteneur, et qui affiche un fichier texte dans ce dossier partagé lors du lancement du conteneur.
+- Installer openssh par default dans l'image et faire en sorte qu'il se lance automatiquement au démarrage du conteneur.
 
 indice : pour lancer le service ssh et rester dessus, on peut utiliser : 
 ```
 /usr/sbin/sshd -D
 ```
 
-- Rajouter un user par défaut.
-- Puis rajouter un fichier qui permet de se connecter avec des clef ssh connues.
-- Puis vérifier les log de connexion via le SDTOUT.
+- Rajouter un user autre que root, sans mot de passe.
+- Ouvrir un port extérieur vers le port ssh du conteneur pour que l'user créé puisse s'y connecter.
+- Rajouter un fichier qui permet de se connecter avec des clef ssh publique connues.
+- Puis vérifier les logs de connexion via le SDTOUT.
