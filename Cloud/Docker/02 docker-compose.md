@@ -18,9 +18,7 @@ https://docs.docker.com/compose/install/
 
 ## Composons :
 
-créons un fichier ```docker-compose.yml```
-
-LA doc de référence :
+LA doc de référcence :
 https://docs.docker.com/compose/compose-file/
 
 
@@ -45,7 +43,7 @@ version: '3'
 services:
   
   database :
-  	image: postgres
+    image: postgres
     restart: always
   volumes:
     - ../Postgres/dbdata:/var/lib/postgresql/data
