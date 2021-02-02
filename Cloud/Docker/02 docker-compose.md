@@ -102,7 +102,7 @@ services:
 
   postgres:
     image: postgres:11.5-alpine
-    env_file: .secret
+    env_file: .env
     restart: always
     volumes:
       - ./Postgres/dbdata:/var/lib/postgresql/data
@@ -115,7 +115,7 @@ services:
 ```
 
 
-Nous n'avons plus qu'a créer un fichier nommé ```.secret``` avec les variables et de ne mettre les droits de lecture qu'a root :
+Nous n'avons plus qu'a créer un fichier nommé ```.env``` avec les variables et de ne mettre les droits de lecture qu'a root :
 
 ```text
 POSTGRES_USER=admin
