@@ -16,11 +16,13 @@ Tout d’abord un cluster qu’est-ce que c’est ? Littéralement une grappe de
 
 Swarm est production-ready et, selon Docker inc, il a été testé pour scaler jusqu’à 1 000 nœuds et 50 000 conteneurs sans dégradation de performance.
 
-Il existe deux types de rôles pour un noeud:
+Il existe deux types de rôles pour un noeud. On ne dit plus maître / esclave, mais :
 
 - **manager node**: réalise l’orchestration et les actions de management du cluster. Envoie également les tâches aux workers. C'est avec lui qu'on discute en cli.
 
 - **worker node**: réalise les tâches assignées par le manager et lui envoie un feedback sur l’état des tâches.
+
+
 
 Les managers sont les leaders du cluster et c’est eux qui sont responsables de l’exécution des algorithmes d’orchestration.
 
@@ -42,12 +44,22 @@ https://docs.docker.com/machine/
 
    
 ```bash
-docker-machine create --driver virtualbox --virtualbox-boot2docker-url ./ISO/boot2docker.iso manager
+# Pour une iso déjà téléchargée :
+docker-machine create --driver virtualbox \
+	--virtualbox-boot2docker-url \
+	/home/slaan/ISO/boot2docker.iso \
+	manager
+
+# Ou pour la dl automatiquement. C'est quand même pratique :
+docker-machine create -d virtualbox \
+	--virtualbox-import-boot2docker-vm \
+	boot2docker-vm \
+	manager
 ```
 
 Ensuite, on peut aller en ssh avec simplement :
 	
-	docker-machine ssh
+	docker-machine ssh manager
 
 
 C'est pratique pour faire des test à la maison par exemple.
@@ -58,79 +70,57 @@ Mais bon, continuons comme si nous avions de vrais machines. Il nous faudra donc
 - L'IP du futur manager
 - Les ports ouverts entre toutes ces machines. Autrement dit, pas de firewall installés.
 
-
+allez hop, un petit ```docker swarm``` pour voir ce qu'il a dans le ventre.
 
 1. Initialiser le cluster :
+Sur la première machine dites : manager
    
    ```bash
-   docker-machine ssh manager "docker swarm init \
-       --listen-addr $(docker-machine ip manager) \
-       --advertise-addr $(docker-machine ip manager)"
-   
-   # Sous Windows, virer les \
+   docker swarm init
    ```
 
-6. Récuperer le token du cluster :
-   
-   ```bash
-   export worker_token=$(docker-machine ssh manager "docker swarm \
-   join-token worker -q")
-   
-   # Sous Windows :
-   $worker_token=$(docker-machine ssh manager "docker swarm join-token worker -q")
-   ```
+et hop, on note le token bien au chaud.
 
-7. Joindre les noeuds dans le cluster :
+ ```--advertise-addr <IP>``` : Pour spécifier l'interface réseau qui servira à faire des échanges, utile dans les serveurs car de nombreuses interfaces peuvent co-exister.
+
+2. Joindre les noeuds dans le cluster :
    
    ```bash
-   docker-machine ssh worker1 "docker swarm join \
+   docker swarm join \
        --token=${worker_token} \
        --listen-addr $(docker-machine ip worker1) \
-       --advertise-addr $(docker-machine ip worker1) \
-       $(docker-machine ip manager)"
-   
-   docker-machine ssh worker2 "docker swarm join \
-       --token=${worker_token} \
-       --listen-addr $(docker-machine ip worker2) \
-       --advertise-addr $(docker-machine ip worker2) \
-       $(docker-machine ip manager)"
-   
-   # Merdows : Virer les \
+       --advertise-addr $(docker-machine ip worker1)   
    ```
+   
+   Ou copier coller la ligne que nous a donné le manager à la création du swarm.
 
-8. Vérifier que tout s'est bien passé :
+3. Vérifier que tout s'est bien passé :
    
    ```bash
-   docker-machine ssh manager "docker node ls"
+   # Sur le manager :
+   docker node ls
    ```
 
 9. Ajoutons quelques outils qui permettent de visualiser plus joliment notre cluster :
    
    ```bash
-   docker-machine ssh manager "docker service create \
+   docker service create \
      --name=viz \
      --publish=5050:8080/tcp \
      --constraint=node.role==manager \
      --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
-     dockersamples/visualizer"
+     dockersamples/visualizer
    ```
    
-   Récupérons l'adresse ip du manager et allons voir du coté du port 5050. Visualizer est un outils relativement simple.
+   Avez vous noté quelque chose de différent ? Nous n'utilisons pas ici docker run, mais docker server create.
    
-   Pour une orchestration un peu plus poussée en GUI, nous pouvons utiliser Portainer :
-   
-   ```bash
-   docker-machine ssh manager "docker service create \
-    --name=portainer \
-    --publish=5060:9000/tcp \
-    --constraint=node.role==manager \
-    --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
-    portainer/portainer"
-   ```
+#### Exercice :
+
+Mettez moi ça sur un docker-compose.yml !
 
 ### Traefik :
 
-Traefik est un reverse-proxy. Il administre les requetes en fonction du nom de domaine auquelles elles sont ratachées et gère les certificats SSL pour avoir du https facilement avec lets-encrypt. Pour ceux qui connaissent, c'est un peu le nginx-jwilder-letsencrypt boosté et moderne car il gère, , entre autre, le load-balancing. De plus, Il s'integre parfaitement à l'environnement docker et swarm. 
+Traefik est un reverse-proxy. Il administre les requêtes en fonction du nom de domaine auxquelles elles sont rattachées et gère les certificats SSL pour avoir du https facilement avec lets-encrypt. Il gère, entre autre, le load-balancing. De plus, Il s’intègre parfaitement à l'environnement docker et swarm. 
 
 1. Créons un réseau qui ne sera utilisé que par Traefik et les application front qui utilisent le port HTTP.
    
@@ -147,7 +137,7 @@ Traefik est un reverse-proxy. Il administre les requetes en fonction du nom de d
        --publish 80:80 --publish 8080:8080 \
        --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
        --network traefik-net \
-       traefik \
+       traefik:1.7 \
        --docker \
        --docker.swarmMode \
        --docker.domain=traefik \
@@ -242,35 +232,49 @@ Traefik est un reverse-proxy. Il administre les requetes en fonction du nom de d
 
 Référence : https://docs.docker.com/compose/compose-file/#deploy
 
-Presque pareil, avec quelques différences légères. Tout d'abord, il convient d'utiliser les variables d'environement du noeud **Manager**. De cette façon, nous pouvons utiliser des commandes docker et compose directement depuis notre pc de dev' comme si c'etait le serveur de prod.
+Presque pareil, avec quelques différences légères. 
+un champs "deploy" est à rajouter :
+
 
 ```bash
-# Checker les variables d'environements :
-docker-machine env manager
-# Les utiliser :
-eval $(docker-machine env manager)
+version: "3.9"
+services:
+  redis:
+    image: redis:alpine
+    deploy:
+      replicas: 6
+      placement:
+        max_replicas_per_node: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+ou :
+
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.role == manager
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+        
 ```
 
-Une fois éxécuté, nous pouvons nous passer du *docker-machine ssh trucmuche* :
-
-```bash
-docker-machine ls
-docker service ls
-docker ps
-docker node ls
-docker service ls
-# etc etc...
-```
-
-Pour deployer un fichier de config docker-compose en yml :
+Pour déployer un fichier de config docker-compose en yml :
 
 ```bash
 docker stack deploy -c docker-compose.yml NOM_DU_STACK
 ```
 
-Nouveautée : Docker stack deploy demande de nommer le cluster.
+Nouveautés : Docker stack deploy demande de nommer le cluster.
 
-A voir : Fichier d'exemple yml dans dossier du cours.
+
 
 ### Cleanup et reboot :
 
@@ -283,31 +287,6 @@ eval $(docker-machine env -u)
 & "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env -u | Invoke-Expression
 ```
 
-### Commandes utiles :
-
-```bash
-docker-machine create --driver virtualbox myvm1 # Create a VM (Mac, Win7, Linux)
-docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm1 # Win10
-docker-machine env myvm1                # View basic information about your node
-docker-machine ssh myvm1 "docker node ls"         # List the nodes in your swarm
-docker-machine ssh myvm1 "docker node inspect <node ID>"        # Inspect a node
-docker-machine ssh myvm1 "docker swarm join-token -q worker"   # View join token
-docker-machine ssh myvm1   # Open an SSH session with the VM; type "exit" to end
-docker node ls                # View nodes in swarm (while logged on to manager)
-docker-machine ssh myvm2 "docker swarm leave"  # Make the worker leave the swarm
-docker-machine ssh myvm1 "docker swarm leave -f" # Make master leave, kill swarm
-docker-machine ls # list VMs, asterisk shows which VM this shell is talking to
-docker-machine start myvm1            # Start a VM that is currently not running
-docker-machine env myvm1      # show environment variables and command for myvm1
-eval $(docker-machine env myvm1)         # Mac command to connect shell to myvm1
-& "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression   # Windows command to connect shell to myvm1
-docker stack deploy -c <file> <app>  # Deploy an app; command shell must be set to talk to manager (myvm1), uses local Compose file
-docker-machine scp docker-compose.yml myvm1:~ # Copy file to node's home dir (only required if you use ssh to connect to manager and deploy the app)
-docker-machine ssh myvm1 "docker stack deploy -c <file> <app>"   # Deploy an app using ssh (you must have first copied the Compose file to myvm1)
-eval $(docker-machine env -u)     # Disconnect shell from VMs, use native docker
-docker-machine stop $(docker-machine ls -q)               # Stop all running VMs
-docker-machine rm $(docker-machine ls -q) # Delete all VMs and their disk images
-```
 
 ## HTTPS Avec Let's Encrypt
 
