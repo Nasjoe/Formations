@@ -20,7 +20,7 @@ https://docs.docker.com/compose/install/
 
 créons un fichier ```docker-compose.yml```
 
-LA doc de référcence :
+LA doc de référence :
 https://docs.docker.com/compose/compose-file/
 
 
