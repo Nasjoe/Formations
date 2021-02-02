@@ -45,10 +45,10 @@ services:
   database :
     image: postgres
     restart: always
-  volumes:
-    - ../Postgres/dbdata:/var/lib/postgresql/data
-  expose:
-    - 5432
+    volumes:
+      - ../Postgres/dbdata:/var/lib/postgresql/data
+    expose:
+      - 5432
   
   web:
     build: .
