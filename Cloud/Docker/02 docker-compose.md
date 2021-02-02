@@ -18,6 +18,8 @@ https://docs.docker.com/compose/install/
 
 ## Composons :
 
+créons un fichier ```docker-compose.yml```
+
 LA doc de référcence :
 https://docs.docker.com/compose/compose-file/
 
