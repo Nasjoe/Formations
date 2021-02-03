@@ -171,7 +171,7 @@ Traefik est un reverse-proxy. Il administre les requêtes en fonction du nom de 
 2. Déploiement de Traefik :
    
    ```bash
-   docker-machine ssh manager "docker service create \
+   docker service create \
        --name traefik \
        --constraint=node.role==manager \
        --publish 80:80 --publish 8080:8080 \
@@ -182,24 +182,24 @@ Traefik est un reverse-proxy. Il administre les requêtes en fonction du nom de 
        --docker.swarmMode \
        --docker.domain=traefik \
        --docker.watch \
-       --api"
+       --api
    ```
 
 3. Lançons quelques applications pour tester notre reverse-proxy. Ici, on va utiliser un simple serveur web écrit en Go : **whoami**.  Lançons deux instances pour voir comment se comporte le **swarm**.
    
    ```bash
-   docker-machine ssh manager "docker service create \
+   docker service create \
        --name whoami0 \
        --label traefik.port=80 \
        --network traefik-net \
-       containous/whoami"
+       containous/whoami
    
-   docker-machine ssh manager "docker service create \
+   docker service create \
        --name whoami1 \
        --label traefik.port=80 \
        --network traefik-net \
        --label traefik.backend.loadbalancer.sticky=true \
-       containous/whoami"
+       containous/whoami
    ```
    
         Notez le `--label traefik.backend.loadbalancer.stickiness=true` .
@@ -207,7 +207,7 @@ Traefik est un reverse-proxy. Il administre les requêtes en fonction du nom de 
 4. Vérifions que tout s'est bien déroulé :
    
    ```bash
-   docker-machine ssh manager "docker service ls"
+   docker service ls
    ```
 
 5. Lançons nos requêtes http pour tester Traefik :
@@ -215,29 +215,29 @@ Traefik est un reverse-proxy. Il administre les requêtes en fonction du nom de 
    Ici, nous allons utiliser curl qui va nous permettre de simuler une requete lié à un nom de domaine. En production, il faudra configurer nos redirections DNS.
    
    ```bash
-   curl -H Host:whoami0.traefik http://$(docker-machine ip manager)
-   curl -H Host:whoami1.traefik http://$(docker-machine ip manager)
+   curl -H Host:whoami0.traefik http://$(ip manager)
+   curl -H Host:whoami1.traefik http://$(ip manager)
    ```
    
    Mais ne nons arretons pas la ! Traefik sait gerer toute les requetes, même celles qui sont adréssées directement aux noeuds ! 
    
    ```bash
-   curl -H Host:whoami0.traefik http://$(docker-machine ip worker0)
-   curl -H Host:whoami0.traefik http://$(docker-machine ip worker1)
-   curl -H Host:whoami1.traefik http://$(docker-machine ip worker0)
-   curl -H Host:whoami1.traefik http://$(docker-machine ip worker1)
+   curl -H Host:whoami0.traefik http://$(ip worker0)
+   curl -H Host:whoami0.traefik http://$(ip worker1)
+   curl -H Host:whoami1.traefik http://$(ip worker0)
+   curl -H Host:whoami1.traefik http://$(ip worker1)
    ```
 
 6. Utilisons la puissance de Docker-Swarm : **Le Scalling** !
    
    ```bash
-   docker-machine ssh manager "docker service scale whoami0=5"
-   docker-machine ssh manager "docker service scale whoami1=5"
+   docker service scale whoami0=5
+   docker service scale whoami1=5
    
-   docker-machine ssh manager "docker service ls"
-   docker-machine ssh manager "docker ps"
-   docker-machine ssh worker1 "docker ps"
-   docker-machine ssh worker2 "docker ps"
+   docker service ls
+   docker ps
+   docker ps
+   docker ps
    ```
    
    Et lançons dans tout les sens :
@@ -261,12 +261,6 @@ Traefik est un reverse-proxy. Il administre les requêtes en fonction du nom de 
 
 ![MAGIC](https://i.giphy.com/ujUdrdpX7Ok5W.giff)
 
-8. Nettoyage :
-   
-   ```bash
-   #Suppression des machines virtuelles
-   docker-machine rm manager worker1 worker2
-   ```
 
 
 
