@@ -114,6 +114,46 @@ et hop, on note le token bien au chaud.
    
    Avez vous noté quelque chose de différent ? Nous n'utilisons pas ici docker run, mais docker server create.
    
+### Et docker-compose dans tout ça ?
+
+Référence : https://docs.docker.com/compose/compose-file/#deploy
+
+Presque pareil, avec quelques différences légères. 
+un champs "deploy" est à rajouter :
+
+
+```bash
+version: "3.9"
+services:
+  redis:
+    image: redis:alpine
+    deploy:
+      replicas: 6
+      restart_policy:
+        condition: on-failure
+
+ou :
+
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: on-failure
+        
+```
+
+Pour déployer un fichier de config docker-compose en yml :
+
+```bash
+docker stack deploy -c docker-compose.yml NOM_DU_STACK
+```
+
+Nouveautés : Docker stack deploy demande de nommer le cluster.
+
+
+
 #### Exercice :
 
 Mettez moi ça sur un docker-compose.yml !
@@ -170,7 +210,7 @@ Traefik est un reverse-proxy. Il administre les requêtes en fonction du nom de 
    docker-machine ssh manager "docker service ls"
    ```
 
-5. Lançons nos requetes http pour tester Traefik :
+5. Lançons nos requêtes http pour tester Traefik :
    
    Ici, nous allons utiliser curl qui va nous permettre de simuler une requete lié à un nom de domaine. En production, il faudra configurer nos redirections DNS.
    
@@ -227,52 +267,6 @@ Traefik est un reverse-proxy. Il administre les requêtes en fonction du nom de 
    #Suppression des machines virtuelles
    docker-machine rm manager worker1 worker2
    ```
-
-## Et docker-compose dans tout ça ?
-
-Référence : https://docs.docker.com/compose/compose-file/#deploy
-
-Presque pareil, avec quelques différences légères. 
-un champs "deploy" est à rajouter :
-
-
-```bash
-version: "3.9"
-services:
-  redis:
-    image: redis:alpine
-    deploy:
-      replicas: 6
-      placement:
-        max_replicas_per_node: 1
-      update_config:
-        parallelism: 2
-        delay: 10s
-      restart_policy:
-        condition: on-failure
-
-ou :
-
-    deploy:
-      mode: global
-      placement:
-        constraints:
-          - node.role == manager
-      update_config:
-        parallelism: 1
-        delay: 10s
-      restart_policy:
-        condition: on-failure
-        
-```
-
-Pour déployer un fichier de config docker-compose en yml :
-
-```bash
-docker stack deploy -c docker-compose.yml NOM_DU_STACK
-```
-
-Nouveautés : Docker stack deploy demande de nommer le cluster.
 
 
 
