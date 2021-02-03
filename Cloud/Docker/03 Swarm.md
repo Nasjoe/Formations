@@ -165,7 +165,7 @@ Traefik est un reverse-proxy. Il administre les requêtes en fonction du nom de 
 1. Créons un réseau qui ne sera utilisé que par Traefik et les application front qui utilisent le port HTTP.
    
    ```bash
-   docker-machine ssh manager "docker network create --driver=overlay traefik-net"
+   docker network create --driver=overlay traefik-net
    ```
 
 2. Déploiement de Traefik :
