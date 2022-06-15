@@ -27,12 +27,9 @@ p
     border: 1px solid black;
 	    
     width: 50%;  /* peut etre en pixel : 250px; */
-    height: 50%
 
     min-width: 400px;
     max-width: 600px;
-    min-height: 400px;
-    max-height: 600px;
 }
 ```
 
