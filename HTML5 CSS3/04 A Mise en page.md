@@ -93,6 +93,24 @@ Si vous voulez que le texte ne dépasse pas des limites du paragraphe, il va fal
 - scroll: là encore, le texte sera coupé s'il dépasse les limites. Sauf que cette fois, le navigateur mettra en place des barres de défilement pour qu'on puisse lire l'ensemble du texte. C'est un peu comme un cadre à l'intérieur de la page.
 - auto: c'est le mode « pilote automatique ». En gros, c'est le navigateur qui décide de mettre ou non des barres de défilement (il n'en mettra que si c'est nécessaire). C'est la valeur que je conseille d'utiliser le plus souvent.
 
+Par exemple, si le texte dépasse de section :
+```css
+section
+{
+	border: 1px black solid;
+	background-color: green;
+	width: 80%;
+	height: 100px;	
+
+	margin-top: 10px;
+	margin-bottom: 10px;	
+
+	padding: 10px;
+
+	overflow: scroll;
+}
+
+```
 
 Pour les textes trop large, souvent le cas avec les url, on utilise `word-wrap: break-word;`
 
